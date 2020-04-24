@@ -1,0 +1,3 @@
+Welcome to CSSE433 
+Final Project: Book Trader
+Group Members: Mashengjun Li, Jiadi Wang, Wenze Ma, Jiafan Lin
