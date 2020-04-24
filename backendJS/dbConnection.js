@@ -1,15 +1,26 @@
 //@ts-check
 const mongoose = require('mongoose');
 dbURI = "mongodb://localhost:27017/BookTrader";
-mongoose.connect(dbURI, {
-  useNewUrlParser: true,
-  useFindAndModify: false
-}).then(() => {
-  console.log('Database connection successful');
-  console.log(`Mongoose connected to ${dbURI}`);
-}).catch(err => {
-  console.error(`Database connection error: ${err}`);
-});
+
+
+class Database {
+  constructor () {
+    this.connectToDB();
+  }
+  connectToDB() {
+    mongoose.connect(dbURI, {
+      useNewUrlParser: true,
+      useFindAndModify: false
+    }).then(() => {
+      console.log('Database connection successful');
+      console.log(`Mongoose connected to ${dbURI}`);
+    }).catch(err => {
+      console.error(`Database connection error: ${err}`);
+    });
+  }
+}
+
+module.exports = new Database();
 // var rh = rh || {};
 
 // var client = require('mongodb').MongoClient;

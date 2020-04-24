@@ -1,0 +1,28 @@
+{
+  "name": "book_trader",
+  "version": "1.0.0",
+  "description": "A repository for CSSE433 Final project at Rose-Hulman Institute of Technology",
+  "main": "main.js",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Freedom4501/Book_Trader.git"
+  },
+  "keywords": [
+    "node",
+    "mongodb",
+    "mongoose"
+  ],
+  "author": "Wenze Ma, Jiadi Wang, Mashengjun Li, Jiafan Lin",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Freedom4501/Book_Trader/issues"
+  },
+  "homepage": "https://github.com/Freedom4501/Book_Trader#readme"
+}
