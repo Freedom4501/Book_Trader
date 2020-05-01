@@ -12,8 +12,7 @@
 
 <body>
   <nav class="navbar fixed-top">
-    Book Trader
-    
+    Harry Potter 1(this needs to be fixed)
     <div class="btn-group">
       <span data-toggle="dropdown">
         <i class="material-icons">menu</i>
@@ -21,49 +20,15 @@
       <div class="dropdown-menu dropdown-menu-right">
         <button id="loginBtn" class="dropdown-item" type="button" data-toggle="modal" data-target="#loginDialog">LOGIN</button>
         <button id="registerBtn" class="dropdown-item" type="button" data-toggle="modal" data-target="#registerDialog">REGISTER</button>
-        <button id="searchBtn" class="dropdown-item" type="button" data-toggle="modal" data-target="#searchDialog">SEARCH</button>
-        <button id="addBtn" class="dropdown-item" type="button" data-toggle="modal" data-target="#addDialog">ADD A BOOK</button>
       </div>
     </div>
   </nav>
-  <div id="main-page" class="container page-container">
+
+
+  <div id="book-page" class="container page-container">
     <div id="book-container" class = "container">
-      <ul>
-        
-          <a href = "book.html">
-            <img id="hp1" src="images/hp1.jpg" alt="Harry Potter 1" height="200" width = "150"> 
-          </a>
-          <a href = "https://www.google.com">
-            <img id="hp2" src="images/hp2.jpg" alt="Harry Potter 2" height="200" width = "150"> 
-          </a>
-          
-          <a href = "https://www.google.com">
-            <img id="hp3" src="images/hp3.jpeg" alt="Harry Potter 3" height="200" width = "150"> 
-          </a>
-
-          <a href = "https://www.google.com">
-            <img id="hp4" src="images/hp4.jpeg" alt="Harry Potter 4" height="200" width = "150"> 
-          </a>
-
-          <a href = "https://www.google.com">
-            <img id="hp5" src="images/hp5.jpeg" alt="Harry Potter 5" height="200" width = "150"> 
-          </a>
-
-          <a href = "https://www.google.com">
-            <img id="hp6" src="images/hp6.jpg" alt="Harry Potter 6" height="200" width = "150"> 
-          </a>
-
-          <a href = "https://www.google.com">
-            <img id="hp7" src="images/hp7.jpg" alt="Harry Potter 7" height="200" width = "150"> 
-          </a>
-
-          <a href = "https://www.google.com">
-            <img id="hp8" src="images/hp8.jpg" alt="Harry Potter 8" height="200" width = "150"> 
-          </a>
-        
-      </ul>
+      <img id="hp1" src="images/hp1.jpg" alt="Harry Potter 1" height="400" width = "300"> 
     </div>
-  
     <div class="modal fade" id="loginDialog" tabindex="-1" role="dialog" aria-labelledby="login"
     aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered" role="document">
@@ -93,6 +58,22 @@
         </div>
       </div>
     </div>
+
+    <div id="infoContainer" class = "container">
+      <div id="titleContainer" class ="container" height="400">
+        <h2>Harry Potter 1(This needs to be fixed)</h2>
+        <p >Book information</p>
+
+      </div>
+      <div id="buttonGroup" class = "container" >
+        <ul>
+          <button type="button" id="submitAddToCart" class="btn btn-outline-dark">Add to Cart</button>
+          <button type="button" id="submitPurchase" class="btn btn-outline-dark">Buy It</button>
+        </ul>
+      </div>
+    </div>
+    
+
     <div class="modal fade" id="registerDialog" tabindex="-1" role="dialog" aria-labelledby="register"
     aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered" role="document">
@@ -141,75 +122,6 @@
           <div class="modal-footer">
             <button type="button" class="btn btn-outline-dark" data-dismiss="modal">CANCEL</button>
             <button type="button" id="submitRegister" class="btn btn-outline-dark" data-dismiss="modal">REGISTER</button>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="modal fade" id="searchDialog" tabindex="-1" role="dialog" aria-labelledby="search"
-    aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title">Search</h5>
-          </div>
-          <div class="modal-body">
-            <div class="form-group row">
-              <label for="searchISBN" class="col-sm-2 control-label">ISBN:</label>
-              <div class="col-sm-10">
-                <input type="text" id="searchISBN" class="form-control" placeholder="Book ISBN">
-              </div>
-            </div>
-            <div class="form-group row">
-              <label for="searchTitle" class="col-sm-2 control-label">Title:</label>
-              <div class="col-sm-10">
-                <input type="text" id="searchTitle" class="form-control" placeholder="Book Title">
-              </div>
-            </div>
-            <div class="form-group row">
-              <label for="searchAuthor" class="col-sm-2 control-label">Author:</label>
-              <div class="col-sm-10">
-                <input type="text" id="searchAuthor" class="form-control" placeholder="Book Author">
-              </div>
-            </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-outline-dark" data-dismiss="modal">CANCEL</button>
-            <button type="button" id="submitSearch" class="btn btn-outline-dark" data-dismiss="modal">SEARCH</button>
-            <button type="button" id="searchAllBooks" class="btn btn-outline-dark" data-dismiss="modal">FIND ALL BOOKS</button>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="modal fade" id="addDialog" tabindex="-1" role="dialog" aria-labelledby="add"
-    aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title">Add A Book</h5>
-          </div>
-          <div class="modal-body">
-            <div class="form-group row">
-              <label for="addISBN" class="col-sm-2 control-label">ISBN:</label>
-              <div class="col-sm-10">
-                <input type="text" id="addISBN" class="form-control" placeholder="Book ISBN">
-              </div>
-            </div>
-            <div class="form-group row">
-              <label for="addTitle" class="col-sm-2 control-label">Title:</label>
-              <div class="col-sm-10">
-                <input type="text" id="addTitle" class="form-control" placeholder="Book Title">
-              </div>
-            </div>
-            <div class="form-group row">
-              <label for="addAuthor" class="col-sm-2 control-label">Author:</label>
-              <div class="col-sm-10">
-                <input type="text" id="addAuthor" class="form-control" placeholder="Book Author">
-              </div>
-            </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-outline-dark" data-dismiss="modal">CANCEL</button>
-            <button type="button" id="submitAdd" class="btn btn-outline-dark" data-dismiss="modal">ADD</button>
           </div>
         </div>
       </div>
