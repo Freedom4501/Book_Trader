@@ -1,0 +1,67 @@
+body {
+    background: #DDDDDD;
+}
+
+.navbar {
+    background-color: #800000;
+    color: white;
+}
+
+
+
+.page-container {
+    margin-top: 50px;
+}
+
+#hp1 {
+    display:inline-flex;
+    margin-top: 100px;
+    margin-right: 50px;
+    margin-left: 50px;
+
+}
+#hp2 {
+    margin-top: 100px;
+    margin-right: 50px;
+    margin-left: 50px;
+
+}
+
+#hp3 {
+    margin-top: 100px;
+    margin-right: 50px;
+    margin-left: 50px;
+
+}
+#hp4 {
+    margin-top: 100px;
+    margin-left: 50px;
+    margin-right: 50px;
+
+}
+
+#hp5 {
+    margin-top: 100px;
+    margin-left: 50px;
+    margin-right: 50px;
+
+}
+
+#hp6 {
+    margin-top: 100px;
+    margin-right: 50px;
+    margin-left: 50px;
+
+}
+#hp7 {
+    margin-top: 100px;
+    margin-left: 50px;
+    margin-right: 50px;
+
+}
+#hp8 {
+    margin-top: 100px;
+    margin-left: 50px;
+    margin-right: 50px;
+
+}

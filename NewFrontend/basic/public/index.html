@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="styles/bootstrap.min.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="styles/main.css">
+  <title>Book Trader</title>
+</head>
+
+<body>
+  <nav class="navbar fixed-top">
+    Book Trader
+    
+    <div class="btn-group">
+      <span data-toggle="dropdown">
+        <i class="material-icons">menu</i>
+      </span>
+      <div class="dropdown-menu dropdown-menu-right">
+        <button id="loginBtn" class="dropdown-item" type="button" data-toggle="modal" data-target="#loginDialog">LOGIN</button>
+        <button id="registerBtn" class="dropdown-item" type="button" data-toggle="modal" data-target="#registerDialog">REGISTER</button>
+        <button id="searchBtn" class="dropdown-item" type="button" data-toggle="modal" data-target="#searchDialog">SEARCH</button>
+      </div>
+    </div>
+  </nav>
+  <div id="main-page" class="container page-container">
+    <div id="book-container" class = "container">
+      <ul>
+        
+          <a href = "https://www.google.com">
+            <img id="hp1" src="images/hp1.jpg" alt="Harry Potter 1" height="200" width = "150"> 
+          </a>
+          <a href = "https://www.google.com">
+            <img id="hp2" src="images/hp2.jpg" alt="Harry Potter 2" height="200" width = "150"> 
+          </a>
+          
+          <a href = "https://www.google.com">
+            <img id="hp3" src="images/hp3.jpeg" alt="Harry Potter 3" height="200" width = "150"> 
+          </a>
+
+          <a href = "https://www.google.com">
+            <img id="hp4" src="images/hp4.jpeg" alt="Harry Potter 4" height="200" width = "150"> 
+          </a>
+
+          <a href = "https://www.google.com">
+            <img id="hp5" src="images/hp5.jpeg" alt="Harry Potter 5" height="200" width = "150"> 
+          </a>
+
+          <a href = "https://www.google.com">
+            <img id="hp6" src="images/hp6.jpg" alt="Harry Potter 6" height="200" width = "150"> 
+          </a>
+
+          <a href = "https://www.google.com">
+            <img id="hp7" src="images/hp7.jpg" alt="Harry Potter 7" height="200" width = "150"> 
+          </a>
+
+          <a href = "https://www.google.com">
+            <img id="hp8" src="images/hp8.jpg" alt="Harry Potter 8" height="200" width = "150"> 
+          </a>
+        
+      </ul>
+    </div>
+  
+    <div class="modal fade" id="loginDialog" tabindex="-1" role="dialog" aria-labelledby="login"
+    aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">User Login</h5>
+          </div>
+          <div class="modal-body">
+            <div class="form-group row">
+              <label for="inputUsername" class="col-sm-2 control-label">Username:</label>
+              <div class="col-sm-10">
+                <input type="text" id="inputUsername" class="form-control" placeholder="Your username">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="inputPassword" class="col-sm-2 control-label">Password:</label>
+              <div class="col-sm-10">
+                <input type="password" id="inputPassword" class="form-control" placeholder="Your password">
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" id="register" class="btn btn-outline-dark" data-toggle="modal" data-target="#registerDialog">REGISTER</button>
+            <button type="button" class="btn btn-outline-dark" data-dismiss="modal">CANCEL</button>
+            <button type="button" id="submitLogin" class="btn btn-outline-dark" data-dismiss="modal">LOGIN</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal fade" id="registerDialog" tabindex="-1" role="dialog" aria-labelledby="register"
+    aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">User Registration</h5>
+          </div>
+          <div class="modal-body">
+            <div class="form-group row">
+              <label for="inputName" class="col-sm-2 control-label">Name:</label>
+              <div class="col-sm-10">
+                <input type="text" id="inputName" class="form-control" placeholder="Your name">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="inputUsername" class="col-sm-2 control-label">Username:</label>
+              <div class="col-sm-10">
+                <input type="text" id="inputUsername" class="form-control" placeholder="Your username">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="inputPassword" class="col-sm-2 control-label">Password:</label>
+              <div class="col-sm-10">
+                <input type="password" id="inputPassword" class="form-control" placeholder="Your password">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="reinputPassword" class="col-sm-2 control-label">Re-enter Password:</label>
+              <div class="col-sm-10">
+                <input type="password" id="reinputPassword" class="form-control" placeholder="Your password">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="inputPhone" class="col-sm-2 control-label">Phone Number:</label>
+              <div class="col-sm-10">
+                <input type="number" id="inputPhone" class="form-control" placeholder="Your phone number">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="inputEmail" class="col-sm-2 control-label">Email:</label>
+              <div class="col-sm-10">
+                <input type="email" id="inputEmail" class="form-control" placeholder="Your email">
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-outline-dark" data-dismiss="modal">CANCEL</button>
+            <button type="button" id="submitRegister" class="btn btn-outline-dark" data-dismiss="modal">REGISTER</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal fade" id="searchDialog" tabindex="-1" role="dialog" aria-labelledby="search"
+    aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Search</h5>
+          </div>
+          <div class="modal-body">
+            <div class="form-group row">
+              <label for="searchISBN" class="col-sm-2 control-label">ISBN:</label>
+              <div class="col-sm-10">
+                <input type="text" id="searchISBN" class="form-control" placeholder="Book ISBN">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="searchTitle" class="col-sm-2 control-label">Title:</label>
+              <div class="col-sm-10">
+                <input type="text" id="searchTitle" class="form-control" placeholder="Book Title">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="searchAuthor" class="col-sm-2 control-label">Author:</label>
+              <div class="col-sm-10">
+                <input type="text" id="searchAuthor" class="form-control" placeholder="Book Author">
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-outline-dark" data-dismiss="modal">CANCEL</button>
+            <button type="button" id="submitSearch" class="btn btn-outline-dark" data-dismiss="modal">SEARCH</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="scripts/jquery.min.js"></script>
+  <script src="scripts/popper.min.js"></script>
+  <script src="scripts/bootstrap.min.js"></script>
+  <script src="scripts/main.js"></script>
+</body>
+
+</html>
