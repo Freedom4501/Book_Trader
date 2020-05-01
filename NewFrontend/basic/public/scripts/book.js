@@ -28,7 +28,8 @@
             success: (data) => {
                 console.log(data);
                 book = data;
-                // displayBook(data);
+                window.location = "./book.html";
+                displayBook(data);
             },  
             error: (request, status, error) => {
                 window.location = "./404.html";
@@ -61,6 +62,13 @@
                 console.log(error);
             }
         });
+    }
+
+    function displayBook(data) {
+        localStorage.setItem("title",data.title);
+        localStorage.setItem("isbn",data.isbn);
+        localStorage.setItem("author",data.author);
+        
     }
 
     $(document).ready(function () {

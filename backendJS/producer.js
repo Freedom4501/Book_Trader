@@ -5,7 +5,7 @@ const client = new kafka.KafkaClient();
 const producer = new Producer(client);
     
 const payloads = [
-    { topic: 'testTopic', messages: 'New sale happened', partition: 0 }
+    { topic: 'testTopic', messages: 'new add', partition: 0 }
 ];
     
 producer.send(payloads, function(error, data) {
