@@ -154,6 +154,7 @@ router.route('/books/:isbn')
             if (err) {
                 res.status(404);
                 handleError(new Error(), res, "Invalid isbn provided");
+                
             } else {
                 res.json(book);
             }

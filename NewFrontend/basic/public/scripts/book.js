@@ -25,12 +25,13 @@
         $.ajax ({
             url: `${apiUrl}${isbn}/`,
             type: "GET",
+
             success: (data) => {
                 console.log(data);
                 book = data;
                 window.location = "./book.html";
                 displayBook(data);
-            },  
+            },
             error: (request, status, error) => {
                 window.location = "./404.html";
                 console.log(error);
