@@ -19,25 +19,63 @@
         });
     }
 
-    function searchBookByISBN() {
+    function searchBook() {
 
         const isbn = document.getElementById("searchISBN").value;
-        $.ajax ({
-            url: `${apiUrl}${isbn}/`,
-            type: "GET",
-
-            success: (data) => {
-                console.log(data);
-                book = data;
-                window.location = "./book.html";
-                displayBook(data);
-            },
-            error: (request, status, error) => {
-                window.location = "./404.html";
-                console.log(error);
-            }
-        });
+        const title = document.getElementById("searchTitle").value;
+        const author = document.getElementById("searchAuthor").value;
+        if(isbn != NULL){
+            $.ajax ({
+                url: `${apiUrl}${isbn}/`,
+                type: "GET",
+    
+                success: (data) => {
+                    console.log(data);
+                    book = data;
+                    window.location = "./book.html";
+                    displayBook(data);
+                },
+                error: (request, status, error) => {
+                    window.location = "./404.html";
+                    console.log(error);
+                }
+            });
+        } else if(title != NULL){
+            $.ajax ({
+                url: `${apiUrl}${title}/`,
+                type: "GET",
+    
+                success: (data) => {
+                    console.log(data);
+                    book = data;
+                    window.location = "./book.html";
+                    displayBook(data);
+                },
+                error: (request, status, error) => {
+                    window.location = "./404.html";
+                    console.log(error);
+                }
+            });
+        } else if(author != NULL){
+            $.ajax ({
+                url: `${apiUrl}${author}/`,
+                type: "GET",
+    
+                success: (data) => {
+                    console.log(data);
+                    book = data;
+                    window.location = "./book.html";
+                    displayBook(data);
+                },
+                error: (request, status, error) => {
+                    window.location = "./404.html";
+                    console.log(error);
+                }
+            });
+        }
     }
+
+
 
     function addBook() {
 
@@ -73,7 +111,7 @@
     }
 
     $(document).ready(function () {
-        $("#submitSearch").on("click", searchBookByISBN);
+        $("#submitSearch").on("click", searchBook);
         $("#searchAllBooks").on("click", getAllBooks);
         $("#submitAdd").on("click", addBook);
     });
