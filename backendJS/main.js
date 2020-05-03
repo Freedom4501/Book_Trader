@@ -132,6 +132,10 @@ router.route('/books')
         });
     }).post((req, res) => {
         // console.log(req);
+        var authors = req.body.author;
+        var author_arr = authors.split(",");
+        var existed = false;
+
         Book.create({    
             title: req.body.title,
             author: req.body.author,
@@ -165,8 +169,12 @@ router.route('/books/:isbn')
         new version of update that queries the database once. 
         Introduces null values in database.
     */
+    
+
     .put(containsISBN, (req, res) => {
         // console.log(req)
+        var authors = req.body.author;
+        var author_arr = authors.split(",");
         Book.findOneAndUpdate(
             {"isbn": req.isbn},
             {
@@ -203,6 +211,68 @@ router.route('/books/:isbn')
                 }
             });
     });
+router.route('/books/title/:title')
+    .get((req, res, next) => {
+        Book.find({'title': req.params.title}, function (err, book) {
+            if (err) {
+                res.status(404);
+                handleError(new Error(), res, "Invalid title provided");
+                
+            } else {
+                res.json(book);
+            }
+
+        });
+    })
+    .put(containsTitle, (req, res) => {
+        Book.findOneAndUpdate(
+            {"title": req.title},
+            {
+                $set: {
+                    title: req.body.title,
+                    author: req.body.author,
+                    isbn: req.body.isbn
+                }
+            },
+            {multi: true, new: true}
+        )
+            .exec((err, book) => {
+                if (err) {
+                    res.status(404);
+                    handleError(err, res, 'Problem updating book');
+                } else {
+                    res.json(book);
+                }
+            });
+    })
+
+    .delete(containsTitle, (req, res) => {
+        Book.findOneAndRemove({"title": req.title})
+            .exec((err) => {
+                if (err) {
+                    res.status(404);
+                    handleError(err, res, 'Problem deleting book');
+                } else {
+                    res.status(204);
+                    res.json(null);
+                }
+            });
+    });
+
+
+router.route('/books/author/:author')
+    .get((req, res, next) => {
+        Book.find({'author': req.params.author}, function (err, book) {
+            if (err) {
+                res.status(404);
+                handleError(new Error(), res, "Invalid author provided");
+            } else {
+                res.json(book);
+            }
+        });
+    });
+
+
 
 function containsName(req, res, next) {
     if (!req.params || !req.params.username) {

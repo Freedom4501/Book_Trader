@@ -24,7 +24,7 @@
         const isbn = document.getElementById("searchISBN").value;
         const title = document.getElementById("searchTitle").value;
         const author = document.getElementById("searchAuthor").value;
-        if(isbn != NULL){
+        if(isbn != ""){
             $.ajax ({
                 url: `${apiUrl}${isbn}/`,
                 type: "GET",
@@ -40,7 +40,7 @@
                     console.log(error);
                 }
             });
-        } else if(title != NULL){
+        } else if(title != ""){
             $.ajax ({
                 url: `${apiUrl}${title}/`,
                 type: "GET",
@@ -56,7 +56,7 @@
                     console.log(error);
                 }
             });
-        } else if(author != NULL){
+        } else if(author != ""){
             $.ajax ({
                 url: `${apiUrl}${author}/`,
                 type: "GET",
