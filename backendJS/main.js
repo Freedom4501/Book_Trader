@@ -133,12 +133,12 @@ router.route('/books')
     }).post((req, res) => {
         // console.log(req);
         var authors = req.body.author;
-        var author_arr = authors.split(",");
+        var author_arr = authors.split(", ");
         var existed = false;
 
         Book.create({    
             title: req.body.title,
-            author: req.body.author,
+            author: author_arr,
             isbn: req.body.isbn
         }, (err, book) => {
             if (err) {
