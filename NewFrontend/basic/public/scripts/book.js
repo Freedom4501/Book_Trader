@@ -26,7 +26,7 @@
         const author = document.getElementById("searchAuthor").value;
         if(isbn != ""){
             $.ajax ({
-                url: `${apiUrl}${isbn}/`,
+                url: `${apiUrl}isbn/${isbn}/`,
                 type: "GET",
     
                 success: (data) => {
@@ -42,7 +42,7 @@
             });
         } else if(title != ""){
             $.ajax ({
-                url: `${apiUrl}${title}/`,
+                url: `${apiUrl}title/${title}/`,
                 type: "GET",
     
                 success: (data) => {
@@ -58,7 +58,7 @@
             });
         } else if(author != ""){
             $.ajax ({
-                url: `${apiUrl}${author}/`,
+                url: `${apiUrl}author/${author}/`,
                 type: "GET",
     
                 success: (data) => {
