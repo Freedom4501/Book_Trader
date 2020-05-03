@@ -284,6 +284,16 @@ function containsName(req, res, next) {
         next();
     }
 }
+function containsTitle(req, res, next) {
+    if (!req.params || !req.params.title) {
+        res.status(404);
+        handleError(new Error(), res, "Invalid Title provided");
+    } else {
+        console.log("containsName called!");
+        req.title = req.params.title;
+        next();
+    }
+}
 
 function containsISBN(req, res, next) {
     if (!req.params || !req.params.isbn) {
