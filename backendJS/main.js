@@ -174,13 +174,13 @@ router.route('/books/:isbn')
     .put(containsISBN, (req, res) => {
         // console.log(req)
         var authors = req.body.author;
-        var author_arr = authors.split(",");
+        var author_arr = authors.split(", ");
         Book.findOneAndUpdate(
             {"isbn": req.isbn},
             {
                 $set: {
                     title: req.body.title,
-                    author: req.body.author,
+                    author: author_arr,
                     isbn: req.body.isbn
                 }
             },
