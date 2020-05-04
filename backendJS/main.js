@@ -152,7 +152,7 @@ router.route('/books')
         });
     });
 
-router.route('/books/:isbn/:isbn')
+router.route('/books/isbn/:isbn')
     .get((req, res, next) => {
         Book.findOne({'isbn': req.params.isbn}, function (err, book) {
             if (err) {
