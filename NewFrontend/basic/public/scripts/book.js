@@ -88,9 +88,14 @@
         localStorage.setItem("author",data.author);      
     }
 
+    function getProfile(){
+        window.location="./profile.html";
+    }
+
     $(document).ready(function () {
         $("#submitSearch").on("click", searchBook);
         $("#searchAllBooks").on("click", getAllBooks);
         $("#submitAdd").on("click", addBook);
+        $("#profileBtn").on("click", getProfile);
     });
 })();
