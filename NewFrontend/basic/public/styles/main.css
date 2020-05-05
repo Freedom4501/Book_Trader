@@ -19,6 +19,10 @@ body {
 #book-page {
     display: flex;
 }
+.btn-outline-light {
+    color: #800000;
+
+}
 
 #infoContainer {
     margin-top: 100px;
