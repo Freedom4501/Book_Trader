@@ -19,6 +19,12 @@ body {
 #book-page {
     display: flex;
 }
+
+#profilePhoto {
+    display: block;
+    max-width: 150px;
+    max-height: 200px;
+}
 .btn-outline-light {
     color: #800000;
 
