@@ -1,7 +1,9 @@
 //@ts-check
+//Mongo
 const mongoose = require('mongoose');
 dbURI = "mongodb://localhost:27017/BookTrader";
 
+//CouchDB
 
 class Database {
   constructor () {
