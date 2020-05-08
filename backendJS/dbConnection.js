@@ -1,26 +1,35 @@
 //@ts-check
 //Mongo
+const neo4j = require('neo4j-driver')
 const mongoose = require('mongoose');
-dbURI = "mongodb://localhost:27017/BookTrader";
-
-//CouchDB
+const mongoURI = "mongodb://localhost:27017/BookTrader";
+const neouri="bolt://lim5.csse.rose-hulman.edu:7687"
 
 class Database {
   constructor () {
-    this.connectToDB();
+    this.connectToMongo();
+    this.connectToNeo4j();
   }
-  connectToDB() {
-    mongoose.connect(dbURI, {
+  connectToMongo() {
+    mongoose.connect(mongoURI, {
       useNewUrlParser: true,
       useFindAndModify: false
     }).then(() => {
       console.log('Database connection successful');
-      console.log(`Mongoose connected to ${dbURI}`);
+      console.log(`Mongoose connected to ${mongoURI}`);
     }).catch(err => {
       console.error(`Database connection error: ${err}`);
     });
   }
+
+  connectToNeo4j() {
+    const driver = neo4j.driver(neouri, neo4j.auth.basic("neo4j", "000201"));    
+  }
 }
+
+
+
+
 module.exports = new Database();
 // var rh = rh || {};
 

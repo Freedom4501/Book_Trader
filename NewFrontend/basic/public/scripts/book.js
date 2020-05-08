@@ -92,10 +92,20 @@
         window.location="./profile.html";
     }
 
+    function getCart(){
+        window.location="./cart.html";
+    }
+
+    function getOrder(){
+        window.location="./cart.html";
+    }
+
     $(document).ready(function () {
         $("#submitSearch").on("click", searchBook);
         $("#searchAllBooks").on("click", getAllBooks);
         $("#submitAdd").on("click", addBook);
         $("#profileBtn").on("click", getProfile);
+        $("#cartBtn").on("click", getCart);
+        $("#orderBtn").on("click", getOrder);
     });
 })();
