@@ -38,6 +38,10 @@
         });
     }
 
+    function getCart(){
+        window.location = "./cart.html";
+    }
+
     $(document).ready(function () {
         let displaySection = $("#titleContainer");
         const bookTitle = document.createElement("h2");
@@ -52,6 +56,7 @@
         document.getElementById("updateISBN").textContent = localStorage.getItem("isbn");
         $("#submitUpdate").on("click", updateBook);
         $("#deleterBtn").on("click", deleteBook);
+        $("#submitAddToCart").on("click", getCart);
 
     });
 })();
