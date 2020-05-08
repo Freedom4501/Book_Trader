@@ -14,13 +14,19 @@
       console.log("Please enter newemail");
       return;
    }
-    couchdb.get(username).then(function (doc) {
-      console.log(doc);
-          localStorage.setItem("NameLogin", doc.newname);
-          localStorage.setItem("EmailLogin", doc.newemail);
-          window.location = "./profile.html";
-      
-  });
+   var doc = {
+    "_id" : username,
+    "Name" : newname,
+    "Email" : newemail
+    }
+//Inserting Document
+couchdb.put(doc, function(err, response) {
+    if (err) {
+        return console.log(err);
+    } else {
+        console.log("Document updated Successfully");
+    }
+});
     }
 
 
