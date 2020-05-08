@@ -4,7 +4,8 @@
   "description": "A repository for CSSE433 Final project at Rose-Hulman Institute of Technology",
   "main": "main.js",
   "dependencies": {
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "pouchdb": "^7.2.1"
   },
   "devDependencies": {},
   "scripts": {
