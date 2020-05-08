@@ -1,4 +1,30 @@
 (function () {
+    const NodeCouchDb = require('node-couchdb');
+ 
+    // node-couchdb instance with default options
+    const couch = new NodeCouchDb();
+    
+    // node-couchdb instance with Memcached
+    const MemcacheNode = require('node-couchdb-plugin-memcached');
+    const couchWithMemcache = new NodeCouchDb({
+        cache: new MemcacheNode
+    });
+    
+    // node-couchdb instance talking to external service
+    const couchExternal = new NodeCouchDb({
+        host: '137.112.104.118',
+        protocol: 'https',
+        port: 5984
+    });
+    
+    // not admin party
+    const couchAuth = new NodeCouchDb({
+        auth: {
+            user: 'login',
+            pass: 'secret'
+        }
+    });
+
 
     "use strict";
     let User;
