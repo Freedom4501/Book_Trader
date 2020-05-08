@@ -1,34 +1,29 @@
 (function () {
     var couchdb = new PouchDB('http://lim5:000201@137.112.104.118:5984/users');
     function updateProfile(){
-      const username = `${localStorage.getItem("UsernameLogin")}`
+        const username = `${localStorage.getItem("UsernameLogin")}`
       const newphone = document.getElementById("inputNewPhone").value;
       const newname = document.getElementById("inputNewName").value;
       const newemail = document.getElementById("inputNewEmail").value;
       couchdb.get(username).then(function (doc) {
-     if(newname != ""){
+      if(newname != ""){
         doc.Name = newname;
-        localStorage.setItem("NameLogin", newname);
-    }if(newemail != ""){
-        doc.email = newemail;
-        localStorage.setItem("EmailLogin", newemail);
+        localStorage.setItem("NameLogin",newname);
+    } if(newemail != ""){
+        doc.Email = newemail;
+        localStorage.setItem("EmailLogin",newemail);
+   }if(newphone != ""){
+    doc.Phone = Number(newphone);
+    localStorage.setItem("PhoneLogin",newphone);
+}
     
-   }if(newphone !=""){
-        doc.Phone = Number(newphone);
-        localStorage.setItem("PhoneLogin", newphone);
-
-   }
-   return couchdb.put(doc);
-}).then(function () {
+    return couchdb.put(doc);
+});then(function () {
     return couchdb.get(username);
 }).then(function (doc) {
     console.log(doc);
 });
-    
-    //newname
-}  
- 
-    
+    }
     function updatePassword(){
         const oldpassword = document.getElementById("inputOldPassword").value;
         const newpassword = document.getElementById("inputNewPassword").value;
@@ -36,6 +31,7 @@
         if(oldpassword==""){
             console.log("Please enter Old Password");
             return;
+        }
         }else if(newpassword == ""){
             console.log("Please enter New Password");
             return;
@@ -55,7 +51,7 @@
                 doc.Password = newpassword;
             }
             return couchdb.put(doc);
-        }).then(function () {
+        });then(function () {
             return couchdb.get(username);
         }).then(function (doc) {
             console.log(doc);
