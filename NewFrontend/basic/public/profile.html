@@ -23,7 +23,7 @@
       </div>
     </div>
   </nav>
-
+  
 
   <div id="profile-page" class="container page-container">
     <div class="row justify-content-center">
@@ -31,13 +31,8 @@
         <div>
           <img id="profilePhoto" src="images/anonymous.png" alt="No Profile Photo">
         </div>
-        <!-- <input id="fileInput" type="file" hidden>  -->
-        <!-- line 32 enables upload local file window -->
-        <!-- <button id="updateProfilePhoto" type="button" class="mr-auto btn btn-outline-light">Update profile
-          photo</button> -->
-        <!-- mr-auto stands for margin right auto -->
         <div class="card-body">
-          <ul>
+          <!-- <ul>
             <h5 class="card-title">Name:
               <label id="profileName">test</label>
             </h5>
@@ -47,11 +42,16 @@
             <h5 class="card-title">Email:
               <label id="profileEmail">test</label>
             </h5>
+            <h5 class="card-title">Phone:
+              <label id="profilePhone">test</label>
+            </h5>
             <h5 class="card-title">
               In your cart:
             </h5>
-          </ul>
+          </ul> -->
+          <div id="profileContainer" class ="container" height="400">
 
+          </div>
           <table id="profileBookList">
               
           </table>
@@ -113,11 +113,12 @@
       </div>
     </div>
   </div>
-
+  <script src="//cdn.jsdelivr.net/npm/pouchdb@7.1.1/dist/pouchdb.min.js"></script>
   <script src="scripts/jquery.min.js"></script>
   <script src="scripts/popper.min.js"></script>
   <script src="scripts/bootstrap.min.js"></script>
   <script src="scripts/main.js"></script>
+  <script src="scripts/user.js"></script>
   <script src="scripts/profile.js"></script>
 </body>
 

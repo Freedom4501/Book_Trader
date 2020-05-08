@@ -1,7 +1,6 @@
 (function () {
 
   "use strict";
-  const apiUrl = `http://137.112.104.119:3000/db/books/`;
 
   function updateProfile(){
       const Name = document.getElementById("inputNewName").value;
@@ -30,16 +29,21 @@
       });
   }
 
-  // function updateProfilePhoto(){
-  //   $("#fileInput").trigger("click");
-  //   $("#fileInput").change((event) => {
-  //     const file = event.target.files[0];
-	// 		console.log("The file input changed", file.name);
-	// 	})
-  // }
 
   $(document).ready(function () {
+    let displaySection = $("#profileContainer");
+    const profileName = document.createElement("h2");
+    profileName.innerHTML = `${localStorage.getItem("NameLogin")}`;
+    displaySection.append(profileName);
+    const profileUsername = document.createElement("p");
+    profileUsername.innerHTML = 'Username: ' + `${localStorage.getItem("UsernameLogin")}`;
+    displaySection.append(profileUsername);
+    const profileEmail = document.createElement("p");
+    profileEmail.innerHTML = 'Email:  ' + `${localStorage.getItem("EmailLogin")}`;
+    displaySection.append(profileEmail);
+    const profilePhone = document.createElement("p");
+    profilePhone.innerHTML = 'Phone:  ' + `${localStorage.getItem("PhoneLogin")}`;
+    displaySection.append(profilePhone);
     $("#submitUpdateProfile").on("click", updateProfile);
-    // $("#updateProfilePhoto").on("click", updateProfilePhoto);
   });
 })();
