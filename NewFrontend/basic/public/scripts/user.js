@@ -82,6 +82,7 @@
     }
 
 
+
     $(document).ready(function () {
         $("#submitRegister").on("click", addUser);
         $("#submitLogin").on("click", login);
