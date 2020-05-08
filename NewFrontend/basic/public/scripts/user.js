@@ -7,6 +7,26 @@
     function login() {
         const username = document.getElementById("inputUsername").value;
         const password = document.getElementById("inputPassword").value;
+        if(username == ""){
+            console.log("Please enter Username");
+            return;
+        }else if(password == ""){
+            console.log("Please enter Password");
+            return;
+        }
+        couchdb.get(username).then(function (doc) {
+            console.log(doc);
+            if(doc.Password!=password){
+                console.log("Login Failed");
+                return;
+            }else{
+                localStorage.setItem("UsernameLogin", username);
+                localStorage.setItem("NameLogin", doc.Name);
+                localStorage.setItem("EmailLogin", doc.Email);
+                localStorage.setItem("PhoneLogin", doc.Phone);
+                window.location = "./profile.html";
+            }
+        });
         
         
     }
