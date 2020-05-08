@@ -14,18 +14,15 @@
       console.log("Please enter newemail");
       return;
    }
-   var doc = {
-    "_id" : username,
-    "Name" : newname,
-    "Email" : newemail
-    }
-//Inserting Document
-couchdb.put(doc, function(err, response) {
-    if (err) {
-        return console.log(err);
-    } else {
-        console.log("Document updated Successfully");
-    }
+   couchdb.get(username).then(function (doc) {
+    
+    doc.Name = newname;//newname
+    doc.email = newemail;
+    return couchdb.put(doc);
+});then(function () {
+    return couchdb.get(username);
+}).then(function (doc) {
+    console.log(doc);
 });
     }
     function updatePassword(){
@@ -35,7 +32,7 @@ couchdb.put(doc, function(err, response) {
         if(oldpassword==""){
             console.log("Please enter Old Password");
             return;
-        }
+        
         }else if(newpassword == ""){
             console.log("Please enter New Password");
             return;
