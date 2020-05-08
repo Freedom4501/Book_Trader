@@ -1,9 +1,8 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const dbRoutes = require('./main');
-
+const PouchDB = require('pouchdb');
 const app = express();
-
 require('./dbConnection');
 
 app.use(require("cors") ())
