@@ -23,7 +23,6 @@
     return couchdb.get(username);
 }).then(function (doc) {
     console.log(doc);
-    window.location = "./profile.html";//refresh
 });
     
     //newname
