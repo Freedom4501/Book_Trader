@@ -2,26 +2,20 @@
     var couchdb = new PouchDB('http://lim5:000201@137.112.104.118:5984/users');
     function updateProfile(){
         const username = `${localStorage.getItem("UsernameLogin")}`
-      const username = document.getElementById("inputProfileUsername").value;
+      const newphone = document.getElementById("inputNewPhone").value;
       const newname = document.getElementById("inputNewName").value;
       const newemail = document.getElementById("inputNewEmail").value;
-      if(username == ""){
-        console.log("Please enter Username");
-        return;
-    }else if(newname == ""){
-        console.log("Please enter Newname");
-        return;
-    }else if(newemail == ""){
-      console.log("Please enter newemail");
-      return;
-   }
-   
-   couchdb.get(username).then(function (doc) {
-    
-    doc.Name = newname;
-    doc.email = newemail;
-    localStorage.setItem("NameLogin", doc.Name);
-    localStorage.setItem("EmailLogin", doc.Email);
+      couchdb.get(username).then(function (doc) {
+      if(newname != ""){
+        doc.Name = newname;
+        localStorage.setItem("NameLogin",newname);
+    } if(newemail != ""){
+        doc.Email = newemail;
+        localStorage.setItem("EmailLogin",newemail);
+   }if(newphone != ""){
+    doc.Phone = Number(newphone);
+    localStorage.setItem("PhoneLogin",newphone);
+}
     
     return couchdb.put(doc);
 });then(function () {
