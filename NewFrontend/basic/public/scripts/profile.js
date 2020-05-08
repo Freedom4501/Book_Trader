@@ -32,7 +32,6 @@
         if(oldpassword==""){
             console.log("Please enter Old Password");
             return;
-        
         }else if(newpassword == ""){
             console.log("Please enter New Password");
             return;
@@ -52,7 +51,7 @@
                 doc.Password = newpassword;
             }
             return couchdb.put(doc);
-        });then(function () {
+        }).then(function () {
             return couchdb.get(username);
         }).then(function (doc) {
             console.log(doc);
