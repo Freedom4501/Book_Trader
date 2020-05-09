@@ -8,7 +8,7 @@ const neouri="bolt://lim5.csse.rose-hulman.edu:7687"
 class Database {
   constructor () {
     this.connectToMongo();
-    this.connectToNeo4j();
+    // this.connectToNeo4j();
   }
   connectToMongo() {
     mongoose.connect(mongoURI, {

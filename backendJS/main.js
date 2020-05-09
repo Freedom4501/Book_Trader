@@ -4,7 +4,6 @@ require('neo4j-driver');
 const request = require('request');
 let User = require('./Schemas/User');
 let Book = require('./Schemas/Book');
-let Order = require('./Schemas/Order');
 
 const express = require('express'),
     router = express.Router();
