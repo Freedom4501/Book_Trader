@@ -18,7 +18,7 @@
 }
     
     return couchdb.put(doc);
-});then(function () {
+}).then(function () {
     return couchdb.get(username);
 }).then(function (doc) {
     console.log(doc);
