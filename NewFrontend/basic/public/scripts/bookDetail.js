@@ -56,7 +56,5 @@
         document.getElementById("updateISBN").textContent = localStorage.getItem("isbn");
         $("#submitUpdate").on("click", updateBook);
         $("#deleterBtn").on("click", deleteBook);
-        $("#submitAddToCart").on("click", getCart);
-
     });
 })();
