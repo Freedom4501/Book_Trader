@@ -32,7 +32,7 @@
             console.log("Please enter Old Password");
             return;
         }
-        }else if(newpassword == ""){
+        else if(newpassword == ""){
             console.log("Please enter New Password");
             return;
         }else if(reinputpassword == ""){
