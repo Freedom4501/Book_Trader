@@ -1,10 +1,11 @@
 (function () {
     var couchdb = new PouchDB('http://lim5:000201@137.112.104.118:5984/users');
     function updateProfile(){
-        const username = `${localStorage.getItem("UsernameLogin")}`
+      const username = `${localStorage.getItem("UsernameLogin")}`
       const newphone = document.getElementById("inputNewPhone").value;
       const newname = document.getElementById("inputNewName").value;
       const newemail = document.getElementById("inputNewEmail").value;
+      const username = `${localStorage.getItem("UsernameLogin")}`
       couchdb.get(username).then(function (doc) {
       if(newname != ""){
         doc.Name = newname;
@@ -16,7 +17,7 @@
     doc.Phone = Number(newphone);
     localStorage.setItem("PhoneLogin",newphone);
 }
-    
+
     return couchdb.put(doc);
 }).then(function () {
     return couchdb.get(username);
