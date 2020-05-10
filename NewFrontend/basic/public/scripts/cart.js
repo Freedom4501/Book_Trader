@@ -1,10 +1,7 @@
 (function () {
   "use strict";
 
-  const driver = neo4j.driver(
-    'bolt://lim5.csse.rose-hulman.edu:7687',
-    neo4j.auth.basic('neo4j', '000201')
-  )
+  const driver = neo4j.driver('bolt://lim5.csse.rose-hulman.edu:7687', neo4j.auth.basic('neo4j', '000201'));
   const session = driver.session();
 
 
@@ -12,11 +9,13 @@
     console.log("Adding to cart!");
     const isbn = document.getElementById("inputCartISBN").value;
     const username = localStorage.getItem("UsernameLogin");
-    const record = session.run(`MATCH (n:Cart) WHERE n.isbn={isbn} AND n.username={username} RETURN count(n) as num`,{isbn, username});
-    if(record[0] == 0){
-      console.log("You have already added this item to your cart.");
-      return;
-    }
+    // var result;
+    // for(result in session.run(`MATCH (n:Cart) WHERE n.ISBN={isbn} AND n.username={username} RETURN count(n) as num`,{isbn, username})){
+    //   if(result['num'] > 0){
+    //     console.log("You have already added this item to your cart.");
+    //     return;
+    //   }
+    // }
     
     if(username == ''){
       console.log("Please login before using shopping cart");
@@ -36,12 +35,12 @@
     console.log("Deleting from cart!");
     const isbn = document.getElementById("deleteCartISBN").value;
     const username = localStorage.getItem("UsernameLogin");
-    const record = session.run(`MATCH (n:Cart) WHERE n.isbn={isbn} AND n.username={username} RETURN count(n) as num`,{isbn, username});
+    // const record = session.run(`MATCH (n:Cart) WHERE n.isbn={isbn} AND n.username={username} RETURN count(n) as num`,{isbn, username});
     
-    if(record[0] == 0){
-      console.log("This item does not exist in your cart");
-      return;
-    }
+    // if(record[0] == 0){
+    //   console.log("This item does not exist in your cart");
+    //   return;
+    // }
     if(username == ''){
       console.log("Please login before using shopping cart");
       return;
@@ -51,7 +50,7 @@
       return;
     }
     else {
-      session.run(`MATCH (n:Cart) WHERE n.isbn={isbn} AND n.username={username} DELETE n`, {isbn, username});
+      session.run(`MATCH (n:Cart) WHERE n.ISBN={isbn} AND n.username={username} DELETE n`, {isbn, username});
       console.log("delete complete")
     }
   }
