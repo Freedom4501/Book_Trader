@@ -4,17 +4,17 @@
       const newphone = document.getElementById("inputNewPhone").value;
       const newname = document.getElementById("inputNewName").value;
       const newemail = document.getElementById("inputNewEmail").value;
-      //const username = `${localStorage.getItem("UsernameLogin")}`
+      const username = `${localStorage.getItem("UsernameLogin")}`
       couchdb.get(username).then(function (doc) {
       if(newname != ""){
         doc.Name = newname;
-        //localStorage.setItem("NameLogin",newname);
+        localStorage.setItem("NameLogin",newname);
     } if(newemail != ""){
         doc.Email = newemail;
-       // localStorage.setItem("EmailLogin",newemail);
+        localStorage.setItem("EmailLogin",newemail);
    }if(newphone != ""){
     doc.Phone = Number(newphone);
-   // localStorage.setItem("PhoneLogin",newphone);
+    localStorage.setItem("PhoneLogin",newphone);
 }
 
     return couchdb.put(doc);
