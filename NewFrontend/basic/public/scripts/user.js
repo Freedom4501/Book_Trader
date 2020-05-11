@@ -57,6 +57,7 @@
         localStorage.setItem("NameLogin",doc.Name);
         localStorage.setItem("EmailLogin",doc.Email);
         localStorage.setItem("PhoneLogin",doc.Phone);
+        localStorage.setItem("UsernameLogin", doc.username);
 
     }
     function addUser() {
