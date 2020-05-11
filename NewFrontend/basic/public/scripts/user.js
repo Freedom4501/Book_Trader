@@ -31,8 +31,34 @@
         
     }
 
+    function searchUser(){
+        const username = document.getElementById("searchUsername").value;
+        couchdb.get(username).then(function (doc){
+            if(doc !=null){
+                window.location = "./profile.html";
+                displayUser(doc);
+            }
+            else{
+                window.location = "./warning.html";
+            }
+                return couchdb.put(doc);
+                }).then(function () {
+                    return couchdb.get(username);
+                }).then(function (doc) {
+                    console.log(doc);
+                });
+            }
+            
 
 
+
+     
+    function displayUser(doc){
+        localStorage.setItem("NameLogin",doc.Name);
+        localStorage.setItem("EmailLogin",doc.Email);
+        localStorage.setItem("PhoneLogin",doc.Phone);
+
+    }
     function addUser() {
         const username = document.getElementById("ReginputUsername").value;
         const Name = document.getElementById("inputName").value;
@@ -86,5 +112,6 @@
     $(document).ready(function () {
         $("#submitRegister").on("click", addUser);
         $("#submitLogin").on("click", login);
+        $("#submitSearchuser").on("click", searchUser);
     });
 })();
