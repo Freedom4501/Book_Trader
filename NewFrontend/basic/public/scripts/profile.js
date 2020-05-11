@@ -24,6 +24,19 @@
     console.log(doc);
 });
     }
+    function deleteProfile(){
+        const username = `${localStorage.getItem("UsernameLogin")}`
+        couchdb.get(username).then(function (doc) {
+            localStorage.setItem("NameLogin",null);
+            localStorage.setItem("EmailLogin",null);
+            localStorage.setItem("PhoneLogin",null);
+            return couchdb.put(doc);
+      }).then(function () {
+          return couchdb.get(username);
+      }).then(function (doc) {
+          console.log(doc);
+      });
+    }
     function updatePassword(){
         const oldpassword = document.getElementById("inputOldPassword").value;
         const newpassword = document.getElementById("inputNewPassword").value;
@@ -75,5 +88,6 @@
     displaySection.append(profilePhone);
     $("#submitUpdateProfile").on("click", updateProfile);
     $("#submitUpdatePassword").on("click", updatePassword);
+    $("#submitDeleteProfile").on("click", deleteProfile);
   });
 })();

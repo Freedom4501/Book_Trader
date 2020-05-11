@@ -21,6 +21,7 @@
         <button id="logoutBtn" class="dropdown-item" type="button" data-toggle="modal">LOGOUT</button>
         <button id="updateProfileBtn" class="dropdown-item" type="button" data-toggle="modal" data-target="#updateProfileDialog">UPDATE PROFILE</button>
         <button id="updatePasswordBtn" class="dropdown-item" type="button" data-toggle="modal" data-target="#updatePasswordDialog">UPDATE PASSWORD</button>
+        <button id="deleteProfileBtn" class="dropdown-item" type="button" data-toggle="modal" data-target="#deleteProfileDialog">DELETE PROFILE</button>
       </div>
     </div>
   </nav>
@@ -103,6 +104,20 @@
     </div>
   </div>
 
+  <div class="modal fade" id="deleteProfileDialog" tabindex="-1" role="dialog" aria-labelledby="deleteProfile"
+  aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Delete Profile</h5>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-dark" data-dismiss="modal">CANCEL</button>
+          <button type="button" id="submitDeleteProfile" class="btn btn-outline-dark" data-dismiss="modal">DELETE</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <div class="modal fade" id="updatePasswordDialog" tabindex="-1" role="dialog" aria-labelledby="updatePassword"
   aria-hidden="true">
