@@ -36,7 +36,7 @@
         couchdb.get(username).then(function (doc){
             if(doc !=null){
                 window.location = "./profile.html";
-                displayUser(doc);
+                displayUser(doc,username);
             }
             else{
                 window.location = "./warning.html";
@@ -57,7 +57,7 @@
         localStorage.setItem("NameLogin",doc.Name);
         localStorage.setItem("EmailLogin",doc.Email);
         localStorage.setItem("PhoneLogin",doc.Phone);
-        localStorage.setItem("UsernameLogin", doc.username);
+        localStorage.setItem("UsernameLogin", username);
 
     }
     function addUser() {
