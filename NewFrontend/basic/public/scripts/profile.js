@@ -27,6 +27,9 @@
     function deleteProfile(){
         const username = `${localStorage.getItem("UsernameLogin")}`
         couchdb.get(username).then(function (doc) {
+            doc.Name = null;
+            doc.Email = null;
+            doc.Phone = null;
             localStorage.setItem("NameLogin",null);
             localStorage.setItem("EmailLogin",null);
             localStorage.setItem("PhoneLogin",null);
