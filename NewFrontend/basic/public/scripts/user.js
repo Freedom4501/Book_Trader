@@ -35,8 +35,13 @@
         const username = document.getElementById("searchUsername").value;
         couchdb.get(username).then(function (doc){
             if(doc !=null){
+                
+                localStorage.setItem("NameLogin",doc.Name);
+                localStorage.setItem("EmailLogin",doc.Email);
+                localStorage.setItem("PhoneLogin",doc.Phone);
+                localStorage.setItem("UsernameLogin", username);
                 window.location = "./profile.html";
-                displayUser(doc,username);
+                //displayUser(doc,username);
             }
             else{
                 window.location = "./warning.html";
