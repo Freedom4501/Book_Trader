@@ -53,7 +53,7 @@
 
 
      
-    function displayUser(doc){
+    function displayUser(doc,username){
         localStorage.setItem("NameLogin",doc.Name);
         localStorage.setItem("EmailLogin",doc.Email);
         localStorage.setItem("PhoneLogin",doc.Phone);
