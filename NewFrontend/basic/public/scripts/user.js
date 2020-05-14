@@ -6,15 +6,18 @@
         const password = document.getElementById("inputPassword").value;
         if(username == ""){
             console.log("Please enter Username");
+            alert("Please enter Username")
             return;
         }else if(password == ""){
             console.log("Please enter Password");
+            alert("Please enter Password");
             return;
         }
         couchdb.get(username).then(function (doc) {
             console.log(doc);
             if(doc.Password!=password){
                 console.log("Login Failed");
+                alert("Login Failed")；
                 return;
             }else{
                 localStorage.setItem("UsernameLogin", username);

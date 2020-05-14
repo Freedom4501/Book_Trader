@@ -69,15 +69,19 @@
         const price = document.getElementById("addPrice").value;
         if(isbn == "" || isbn==null){
             console.log("Please enter ISBN");
+            alert("Please enter ISBN");
             return;
         }else if(title == ""||title==null){
             console.log("Please enter Name");
+            alert("Please enter Name");
             return;
         }else if(author == ""||author==null){
             console.log("Please enter author");
+            alert("Please enter author");
             return;
         }else if(price == ""||price==null){
             console.log("Please enter price");
+            alert("Please enter price");
             return;
         }
         $.ajax ({
@@ -90,11 +94,12 @@
                     console.log("Put succeed");
                 } else {
                     console.log("cannot put");
+                    alert("add book fails");
                 }
             },  
             error: (request, status, error) => {
-                window.location = "./404.html";
                 console.log(error);
+                alert(error);
             }
         });
     }
