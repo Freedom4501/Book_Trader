@@ -2,7 +2,7 @@
 
     "use strict";
     let book;
-    const apiUrl = `http://137.112.104.119:3000/db/books/`;
+    const apiUrl = `http://137.112.104.117:3000/db/books/`;
     function getAllBooks() {
         localStorage.setItem("searchByAuthor","0");
         localStorage.setItem("searchByTitle","0");
@@ -27,9 +27,10 @@
                     if(data!=null){
                         window.location = "./book.html";
                         displayBook(data);
-                    }else{
-                        window.location = "./warning.html";
                     }
+                    // else{
+                    //     window.location = "./warning.html";
+                    // }
                     
                 },
                 error: (request, status, error) => {
@@ -37,20 +38,25 @@
                     console.log(error);
                 }
             });
-        } else if(title != ""){
+        }
+        if(title != ""){
             localStorage.setItem("title",title);
-            localStorage.setItem("searchByAuthor","0");
+            //localStorage.setItem("searchByAuthor","0");
             localStorage.setItem("searchByTitle","1");
             localStorage.setItem("findAll","0");
-            window.location = "./searchpage.html";
-        } else if(author != ""){
+        }else{
+            localStorage.setItem("searchByTitle","0");
+        }
+        if(author != ""){
             localStorage.setItem("author",author);
             localStorage.setItem("searchByAuthor","1");
-            localStorage.setItem("searchByTitle","0");
+            //localStorage.setItem("searchByTitle","0");
             localStorage.setItem("findAll","0");
-            window.location = "./searchpage.html";
+            
+        }else{
+            localStorage.setItem("searchByAuthor","0");
         }
-
+        window.location = "./searchpage.html";
     }
 
 
@@ -60,18 +66,30 @@
         const isbn = document.getElementById("addISBN").value;
         const title = document.getElementById("addTitle").value;
         const author = document.getElementById("addAuthor").value;
-
+        const price = document.getElementById("addPrice").value;
+        if(isbn == "" || isbn==null){
+            console.log("Please enter ISBN");
+            return;
+        }else if(title == ""||title==null){
+            console.log("Please enter Name");
+            return;
+        }else if(author == ""||author==null){
+            console.log("Please enter author");
+            return;
+        }else if(price == ""||price==null){
+            console.log("Please enter price");
+            return;
+        }
         $.ajax ({
             url: apiUrl,
             type: "POST",
-            data: {"title": title, "author": author, "isbn": isbn}, 
+            data: {"title": title, "author": author, "isbn": isbn, "price": price}, 
             dataType: "JSON",
             success: (data) => {
                 if (data) {
                     console.log("Put succeed");
-                    window.location = "./index.html";
                 } else {
-                    console.log("book does not exist");
+                    console.log("cannot put");
                 }
             },  
             error: (request, status, error) => {
@@ -85,7 +103,8 @@
     function displayBook(data) {
         localStorage.setItem("title",data.title);
         localStorage.setItem("isbn",data.isbn);
-        localStorage.setItem("author",data.author);      
+        localStorage.setItem("author",data.author);
+        localStorage.setItem("price", data.price);      
     }
 
     function getProfile(){

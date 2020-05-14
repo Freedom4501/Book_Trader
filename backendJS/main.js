@@ -2,17 +2,10 @@ require('./dbConnection');
 require('mongoose');
 require('neo4j-driver');
 const request = require('request');
-let User = require('./Schemas/User');
 let Book = require('./Schemas/Book');
 
 const express = require('express'),
     router = express.Router();
-
-let newUser = User({
-    name: 'test_name',
-    username: 'test_username',
-    email: 'test@test.com'
-});
 
 
 const methodOverride = require('method-override');
@@ -34,90 +27,6 @@ function handleError(err, res, msg) {
 const logger = require("morgan");
 router.use(logger("dev"));
   
-router.route('/users')
-    .get((req, res, next) => {
-        User.find({}, (err, users) => {
-            if (err) {
-                res.status(400);
-                handleError(err, res, 'Could not find any users.');
-                return;
-            } else {
-                res.status(200);
-                res.json(users);
-            }
-        });
-    }).post((req, res) => {
-        // console.log(req);
-        User.create({    
-            name: req.body.name,
-            username: req.body.username,
-            email: req.body.email
-        }, (err, user) => {
-            if (err) {
-                res.status(400);
-                handleError(err, res, 'Error creating uesr.');
-                return;
-            } else {
-                res.status(201);
-                res.json(user);
-            }
-        });
-    });
-
-router.route('/users/:username')
-    .get((req, res, next) => {
-        User.findOne({'username': req.params.username}, function (err, user) {
-            if (err) {
-                res.status(404);
-                handleError(new Error(), res, "Invalid username provided");
-            } else {
-                res.json(user);
-            }
-        });
-    })
-    // UPDATE a user by username
-    /*  [Middleware] Use containsName middleware in this
-        new version of update that queries the database once. 
-        Introduces null values in database.
-    */
-    .put(containsName, (req, res) => {
-        // console.log(req)
-        User.findOneAndUpdate(
-            {"username": req.username},
-            {
-                $set: {
-                    name: req.body.name,
-                    username: req.body.username,
-                    email: req.body.email
-                }
-            },
-            // update multiple fields, return updated document in response
-            {multi: true, new: true}
-        )
-            .exec((err, user) => {
-                if (err) {
-                    res.status(404);
-                    handleError(err, res, 'Problem updating user');
-                } else {
-                    res.json(user);
-                }
-            });
-    })
-
-    // DELETE a user by username
-    /*  [Middleware] Use containsName middleware */
-    .delete(containsName, (req, res) => {
-        User.findOneAndRemove({"username": req.username})
-            .exec((err) => {
-                if (err) {
-                    res.status(404);
-                    handleError(err, res, 'Problem deleting user');
-                } else {
-                    res.status(204);
-                    res.json(null);
-                }
-            });
-    });
 
 router.route('/books')
     .get((req, res, next) => {
@@ -140,7 +49,8 @@ router.route('/books')
         Book.create({    
             title: req.body.title,
             author: author_arr,
-            isbn: req.body.isbn
+            isbn: req.body.isbn,
+            price: req.body.price
         }, (err, book) => {
             if (err) {
                 res.status(400);
@@ -182,7 +92,8 @@ router.route('/books/isbn/:isbn')
                 $set: {
                     title: req.body.title,
                     author: author_arr,
-                    isbn: req.body.isbn
+                    isbn: req.body.isbn,
+                    price: req.body.price
                 }
             },
             // update multiple fields, return updated document in response
@@ -274,17 +185,6 @@ router.route('/books/author/:author')
     });
 
 
-
-function containsName(req, res, next) {
-    if (!req.params || !req.params.username) {
-        res.status(404);
-        handleError(new Error(), res, "Invalid Name provided");
-    } else {
-        console.log("containsName called!");
-        req.username = req.params.username;
-        next();
-    }
-}
 function containsTitle(req, res, next) {
     if (!req.params || !req.params.title) {
         res.status(404);

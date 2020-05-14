@@ -1,9 +1,6 @@
 (function () {
     "use strict";
     var couchdb = new PouchDB('http://lim5:000201@137.112.104.118:5984/users');
-    couchdb.info().then(function (info) {
-            console.log(info);
-    })
     function login() {
         const username = document.getElementById("inputUsername").value;
         const password = document.getElementById("inputPassword").value;

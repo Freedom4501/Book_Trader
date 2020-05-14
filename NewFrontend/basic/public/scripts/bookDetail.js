@@ -53,6 +53,9 @@
         const bookisbn = document.createElement("p");
         bookisbn.innerHTML = `${localStorage.getItem("isbn")}`;
         displaySection.append(bookisbn);
+        const bookprice = document.createElement("p");
+        bookprice.innerHTML = `${localStorage.getItem("price")}`;
+        displaySection.append(bookprice);
         document.getElementById("updateISBN").textContent = localStorage.getItem("isbn");
         $("#submitUpdate").on("click", updateBook);
         $("#deleterBtn").on("click", deleteBook);
