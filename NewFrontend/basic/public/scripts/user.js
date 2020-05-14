@@ -71,24 +71,37 @@
         const phone = document.getElementById("inputPhone").value;
         if(username == ""){
             console.log("Please enter Username");
+            alert("Please enter Username!");
             return;
         }else if(Name == ""){
             console.log("Please enter Name");
+            alert("Please enter Name!");
+
             return;
         }else if(password == ""){
             console.log("Please enter Password");
+            alert("Please enter Password!");
+
             return;
         }else if(reinputpassword == ""){
             console.log("Please re-enter Password");
+            alert("Please re-enter Password!");
+
             return;
         }else if(email == ""){
             console.log("Please enter Email");
+            alert("Please enter Email!");
+
             return;
         }else if(phone == ""){
             console.log("Please enter phone number");
+            alert("Please enter phone number!");
+
             return;
         }else if(password != reinputpassword){
             console.log("Please check two passwords");
+            alert("Please check two passwords!");
+
             return;
         }else{
             //Preparing the document
