@@ -99,7 +99,7 @@
             },  
             error: (request, status, error) => {
                 console.log(error);
-                alert(error);
+                alert("Add error");
             }
         });
     }
