@@ -16,6 +16,9 @@
         const isbn = document.getElementById("searchISBN").value;
         const title = document.getElementById("searchTitle").value;
         const author = document.getElementById("searchAuthor").value;
+        const gt = document.getElementById("searchPriceGreaterThan").value;
+        const lt = document.getElementById("searchPriceLessThan").value;
+        
         if(isbn != ""){
             $.ajax ({
                 url: `${apiUrl}isbn/${isbn}/`,
@@ -52,7 +55,13 @@
             localStorage.setItem("findAll","0");
             window.location = "./searchpage.html";   
         }else{
-            alert("Please enter something for search");
+            // alert("Please enter something for search");
+            localStorage.setItem("gt",gt);
+            localStorage.setItem("lt",lt);
+            localStorage.setItem("searchByAuthor","0");
+            localStorage.setItem("searchByTitle","0");
+            localStorage.setItem("findAll","0");
+            window.location = "./searchpage.html";   
         }
         
     }
