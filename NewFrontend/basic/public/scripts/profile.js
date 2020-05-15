@@ -73,7 +73,7 @@
         couchdb.get(username).then(function (doc) {
             if(oldpassword!=doc.Password){
                 console.log("Wrong old password");
-                console.log("Wrong old password");
+                alert("Wrong old password");
                 return;
             }else{
                 doc.Password = newpassword;
