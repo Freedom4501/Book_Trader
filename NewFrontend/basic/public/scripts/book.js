@@ -81,23 +81,36 @@
             alert("Please enter price");
             return;
         }
+
         $.ajax ({
-            url: apiUrl,
-            type: "POST",
-            data: {"title": title, "author": author, "isbn": isbn, "price": price}, 
-            dataType: "JSON",
+            url: `${apiUrl}isbn/${isbn}/`,
+            type: "GET",
+
             success: (data) => {
-                if (data) {
-                    console.log(data);
-                    console.log("Put succeed");
+                console.log(data);
+                if (data == null) {
+                    $.ajax ({
+                        url: apiUrl,
+                        type: "POST",
+                        data: {"title": title, "author": author, "isbn": isbn, "price": price}, 
+                        dataType: "JSON",
+                        success: (data2) => {
+                            if (data2) {
+                                console.log(data2);
+                                console.log("Put succeed");
+                            } else {
+                                console.log("cannot put");
+                                alert("add book fails");
+                            }
+                        },  
+                        error: (request, status, error) => {
+                            console.log(error);
+                            alert("Add error");
+                        }
+                    });
                 } else {
-                    console.log("cannot put");
-                    alert("add book fails");
+                    alert("isbn already exists");
                 }
-            },  
-            error: (request, status, error) => {
-                console.log(error);
-                alert("Add error");
             }
         });
     }

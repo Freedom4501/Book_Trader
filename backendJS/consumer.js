@@ -15,3 +15,4 @@ const consumer = new Consumer(
 consumer.on('message', function (message) {
     console.log(message);
 });
+
