@@ -52,6 +52,9 @@
         bookprice.innerHTML = "Price:  " + `${localStorage.getItem("price")}`;
         displaySection.append(bookprice);
         document.getElementById("updateISBN").textContent = localStorage.getItem("isbn");
+        document.getElementById("updateAuthor").value = localStorage.getItem("author");
+        document.getElementById("updateTitle").value = localStorage.getItem("title");
+        document.getElementById("updatePrice").value = localStorage.getItem("price");
         $("#submitUpdate").on("click", updateBook);
         $("#deleterBtn").on("click", deleteBook);
     });
