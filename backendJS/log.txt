@@ -1,0 +1,5 @@
+post_book book10 author1,author3,author8 10000 1234
+delete_book isbn 10000
+get_book author author3
+get_book all
+get_book title book2

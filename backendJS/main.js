@@ -7,6 +7,11 @@ let Book = require('./Schemas/Book');
 const express = require('express'),
     router = express.Router();
 
+var fs = require("fs");
+var log_message = fs.createWriteStream('log.txt', {
+    flags: 'a' //a stands for appending
+});
+
 
 const methodOverride = require('method-override');
 router.use(methodOverride((req, res) => {
@@ -30,6 +35,7 @@ router.use(logger("dev"));
 
 router.route('/books')
     .get((req, res, next) => {
+        log_message.write('get_book all\n')
         Book.find({}, (err, books) => {
             if (err) {
                 res.status(400);
@@ -45,6 +51,8 @@ router.route('/books')
         var authors = req.body.author;
         var author_arr = authors.split(",");
         var existed = false;
+
+        log_message.write(`post_book ${req.body.title} ${author_arr} ${req.body.isbn} ${req.body.price}\n`);
 
         Book.create({    
             title: req.body.title,
@@ -65,6 +73,7 @@ router.route('/books')
 
 router.route('/books/sort/title')
     .get((req, res, next) => {
+        log_message.write(`sort_book all title\n`);
         Book.find({}, null, {sort: { "title": 1 }}, (err, books) => {
             if (err) {
                 res.status(400);
@@ -79,6 +88,7 @@ router.route('/books/sort/title')
 
 router.route('/books/sort/price')
     .get((req, res, next) => {
+        log_message.write(`sort_book all price\n`);
         Book.find({}, null, {sort: { "price": 1 }}, (err, books) => {
             if (err) {
                 res.status(400);
@@ -93,6 +103,7 @@ router.route('/books/sort/price')
 
 router.route('/books/isbn/:isbn')
     .get((req, res, next) => {
+        log_message.write(`get_book isbn ${req.params.isbn}\n`);
         Book.findOne({'isbn': req.params.isbn}, function (err, book) {
             if (err) {
                 res.status(404);
@@ -107,6 +118,7 @@ router.route('/books/isbn/:isbn')
         // console.log(req)
         var authors = req.body.author;
         var author_arr = authors.split(", ");
+        log_message.write(`update_book isbn ${req.isbn} ${req.body.title} ${author_arr} ${req.body.isbn} ${req.body.price}\n`);
         Book.findOneAndUpdate(
             {"isbn": req.isbn},
             {
@@ -130,6 +142,7 @@ router.route('/books/isbn/:isbn')
             });
     })
     .delete(containsISBN, (req, res) => {
+        log_message.write(`delete_book isbn ${req.isbn}\n`);
         Book.findOneAndRemove({"isbn": req.isbn})
             .exec((err) => {
                 if (err) {
@@ -143,6 +156,7 @@ router.route('/books/isbn/:isbn')
     });
 router.route('/books/title/:title')
     .get((req, res, next) => {
+        log_message.write(`get_book title ${req.params.title}\n`);
         Book.find({'title': req.params.title}, function (err, book) {
             if (err) {
                 res.status(404);
@@ -155,6 +169,7 @@ router.route('/books/title/:title')
         });
     })
     .put(containsTitle, (req, res) => {
+        log_message.write(`update_book title ${req.title}\n`);
         Book.findOneAndUpdate(
             {"title": req.title},
             {
@@ -177,6 +192,7 @@ router.route('/books/title/:title')
     })
 
     .delete(containsTitle, (req, res) => {
+        log_message.write(`delete_book title ${req.title}\n`);
         Book.findOneAndRemove({"title": req.title})
             .exec((err) => {
                 if (err) {
@@ -191,6 +207,7 @@ router.route('/books/title/:title')
 
 router.route('/books/title/:title/sort/title')
     .get((req, res, next) => {
+        log_message.write(`sort_book title ${req.params.title} title\n`);
         Book.find({'title': req.params.title}, null, {sort: { "title": 1 }}, function (err, book) {
             if (err) {
                 res.status(404);
@@ -204,6 +221,7 @@ router.route('/books/title/:title/sort/title')
     });
 router.route('/books/title/:title/sort/price')
     .get((req, res, next) => {
+        log_message.write(`sort_book title ${req.params.title} price\n`);
         Book.find({'title': req.params.title}, null, {sort: { "price": 1 }}, function (err, book) {
             if (err) {
                 res.status(404);
@@ -218,6 +236,7 @@ router.route('/books/title/:title/sort/price')
 
 router.route('/books/author/:author')
     .get((req, res, next) => {
+        log_message.write(`get_book author ${req.params.author}\n`);
         Book.find({'author': req.params.author}, function (err, book) {
             if (err) {
                 res.status(404);
@@ -230,6 +249,7 @@ router.route('/books/author/:author')
 
 router.route('/books/author/:author/sort/title')
     .get((req, res, next) => {
+        log_message.write(`sort_book author ${req.params.author} title\n`);
         Book.find({'author': req.params.author}, null, {sort: { "title": 1 }}, function (err, book) {
             if (err) {
                 res.status(404);
@@ -242,6 +262,7 @@ router.route('/books/author/:author/sort/title')
 
 router.route('/books/author/:author/sort/price')
     .get((req, res, next) => {
+        log_message.write(`sort_book author ${req.params.author} price\n`);
         Book.find({'author': req.params.author}, null, {sort: { "price": 1 }}, function (err, book) {
             if (err) {
                 res.status(404);
@@ -254,6 +275,7 @@ router.route('/books/author/:author/sort/price')
 
 router.route('/books/gt/:gt/lt/:lt')
     .get((req, res, next) => {
+        log_message.write(`get_book price ${req.params.gt} ${req.params.lt}\n`);
         Book.find({$and: [{"price":{$gt:req.params.gt}},{"price":{$lt:req.params.lt}}]}, function (err, book) {
             if (err) {
                 res.status(404);
@@ -266,6 +288,7 @@ router.route('/books/gt/:gt/lt/:lt')
 
 router.route('/books/gt/:gt/lt/:lt/sort/title')
     .get((req, res, next) => {
+        log_message.write(`sort_book price ${req.params.gt} ${req.params.lt} title\n`);
         Book.find({$and: [{"price":{$gt:req.params.gt}},{"price":{$lt:req.params.lt}}]}, null, {sort: { "title": 1 }}, function (err, book) {
             if (err) {
                 res.status(404);
@@ -278,6 +301,7 @@ router.route('/books/gt/:gt/lt/:lt/sort/title')
 
 router.route('/books/gt/:gt/lt/:lt/sort/price')
     .get((req, res, next) => {
+        log_message.write(`sort_book price ${req.params.gt} ${req.params.lt} price\n`);
         Book.find({$and: [{"price":{$gt:req.params.gt}},{"price":{$lt:req.params.lt}}]}, null, {sort: { "price": 1 }}, function (err, book) {
             if (err) {
                 res.status(404);
