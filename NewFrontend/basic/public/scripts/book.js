@@ -148,7 +148,7 @@
     }
 
     function getOrder(){
-        window.location="./cart.html";
+        window.location="./order.html";
     }
 
     $(document).ready(function () {
