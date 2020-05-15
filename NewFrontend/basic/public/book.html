@@ -18,8 +18,8 @@
         <i class="material-icons">menu</i>
       </span>
       <div class="dropdown-menu dropdown-menu-right">
-        <button id="loginBtn" class="dropdown-item" type="button" data-toggle="modal" data-target="#loginDialog">LOGIN</button>
-        <button id="registerBtn" class="dropdown-item" type="button" data-toggle="modal" data-target="#registerDialog">REGISTER</button>
+        <!-- <button id="loginBtn" class="dropdown-item" type="button" data-toggle="modal" data-target="#loginDialog">LOGIN</button>
+        <button id="registerBtn" class="dropdown-item" type="button" data-toggle="modal" data-target="#registerDialog">REGISTER</button> -->
         <button id="updateBtn" class="dropdown-item" type="button" data-toggle="modal" data-target="#updateDialog">UPDATE BOOK</button>
         <button id="deleterBtn" class="dropdown-item" type="button" data-toggle="modal">DELETE BOOK</button>
       </div>
@@ -30,35 +30,6 @@
   <div id="book-page" class="container page-container">
     <div id="book-container" class = "container">
       <img id="hp1" src="images/hp1.jpg" alt="Harry Potter 1" height="400" width = "300"> 
-    </div>
-    <div class="modal fade" id="loginDialog" tabindex="-1" role="dialog" aria-labelledby="login"
-    aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title">User Login</h5>
-          </div>
-          <div class="modal-body">
-            <div class="form-group row">
-              <label for="inputUsername" class="col-sm-2 control-label">Username:</label>
-              <div class="col-sm-10">
-                <input type="text" id="inputUsername" class="form-control" placeholder="Your username">
-              </div>
-            </div>
-            <div class="form-group row">
-              <label for="inputPassword" class="col-sm-2 control-label">Password:</label>
-              <div class="col-sm-10">
-                <input type="password" id="inputPassword" class="form-control" placeholder="Your password">
-              </div>
-            </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" id="register" class="btn btn-outline-dark" data-toggle="modal" data-target="#registerDialog">REGISTER</button>
-            <button type="button" class="btn btn-outline-dark" data-dismiss="modal">CANCEL</button>
-            <button type="button" id="submitLogin" class="btn btn-outline-dark" data-dismiss="modal">LOGIN</button>
-          </div>
-        </div>
-      </div>
     </div>
 
     <div id="infoContainer" class = "container">
@@ -74,58 +45,6 @@
     </div>
     
 
-    <div class="modal fade" id="registerDialog" tabindex="-1" role="dialog" aria-labelledby="register"
-    aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title">User Registration</h5>
-          </div>
-          <div class="modal-body">
-            <div class="form-group row">
-              <label for="inputName" class="col-sm-2 control-label">Name:</label>
-              <div class="col-sm-10">
-                <input type="text" id="inputName" class="form-control" placeholder="Your name">
-              </div>
-            </div>
-            <div class="form-group row">
-              <label for="inputUsername" class="col-sm-2 control-label">Username:</label>
-              <div class="col-sm-10">
-                <input type="text" id="inputUsername" class="form-control" placeholder="Your username">
-              </div>
-            </div>
-            <div class="form-group row">
-              <label for="inputPassword" class="col-sm-2 control-label">Password:</label>
-              <div class="col-sm-10">
-                <input type="password" id="inputPassword" class="form-control" placeholder="Your password">
-              </div>
-            </div>
-            <div class="form-group row">
-              <label for="reinputPassword" class="col-sm-2 control-label">Re-enter Password:</label>
-              <div class="col-sm-10">
-                <input type="password" id="reinputPassword" class="form-control" placeholder="Your password">
-              </div>
-            </div>
-            <div class="form-group row">
-              <label for="inputPhone" class="col-sm-2 control-label">Phone Number:</label>
-              <div class="col-sm-10">
-                <input type="number" id="inputPhone" class="form-control" placeholder="Your phone number">
-              </div>
-            </div>
-            <div class="form-group row">
-              <label for="inputEmail" class="col-sm-2 control-label">Email:</label>
-              <div class="col-sm-10">
-                <input type="email" id="inputEmail" class="form-control" placeholder="Your email">
-              </div>
-            </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-outline-dark" data-dismiss="modal">CANCEL</button>
-            <button type="button" id="submitRegister" class="btn btn-outline-dark" data-dismiss="modal">REGISTER</button>
-          </div>
-        </div>
-      </div>
-    </div>
     
     <div class="modal fade" id="updateDialog" tabindex="-1" role="dialog" aria-labelledby="add"
     aria-hidden="true">
@@ -154,7 +73,7 @@
               </div>
             </div>
             <div class="form-group row">
-              <label for="updateAuthor" class="col-sm-2 control-label">Price:</label>
+              <label for="updatePrice" class="col-sm-2 control-label">Price:</label>
               <div class="col-sm-10">
                 <input type="number" id="updatePrice" class="form-control" placeholder="Book Price">
               </div>

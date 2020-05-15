@@ -133,7 +133,9 @@
                 window.location = "./404.html";
                 console.log(error);
             }
+        });
     }
+
     function searchAuthor2(sortBy) {
         $.ajax ({
             url: `${apiUrl}author/${localStorage.getItem("author")}/sort/${sortBy}`,

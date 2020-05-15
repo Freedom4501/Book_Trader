@@ -6,10 +6,11 @@
     function updateBook() {
         const title = document.getElementById("updateTitle").value;
         const author = document.getElementById("updateAuthor").value;
+        const price = document.getElementById("updatePrice").value;
         $.ajax ({
             url: `${apiUrl}isbn/${localStorage.getItem("isbn")}/`,
             type: "PUT",
-            data: {"title": title, "author": author, "isbn": localStorage.getItem("isbn")}, 
+            data: {"title": title, "author": author, "isbn": localStorage.getItem("isbn"), "price": price}, 
             dataType: "JSON",
             success: (data) => {
                 console.log(data);
