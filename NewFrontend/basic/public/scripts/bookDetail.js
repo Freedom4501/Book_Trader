@@ -16,8 +16,8 @@
                 window.location = "./index.html";
             },
             error: (request, status, error) => {
-                window.location = "./404.html";
                 console.log(error);
+                alert("Update fails");
             }
         });
     }
@@ -29,7 +29,6 @@
             success: (data) => {
                 console.log(data);
                 window.location = "./index.html";
-
             },
             error: (request, status, error) => {
                 window.location = "./404.html";
@@ -44,13 +43,13 @@
         bookTitle.innerHTML = `${localStorage.getItem("title")}`;
         displaySection.append(bookTitle);
         const bookAuthor = document.createElement("p");
-        bookAuthor.innerHTML = `${localStorage.getItem("author")}`;
+        bookAuthor.innerHTML = "Author:  " + `${localStorage.getItem("author")}`;
         displaySection.append(bookAuthor);
         const bookisbn = document.createElement("p");
-        bookisbn.innerHTML = `${localStorage.getItem("isbn")}`;
+        bookisbn.innerHTML = "ISBN:  " + `${localStorage.getItem("isbn")}`;
         displaySection.append(bookisbn);
         const bookprice = document.createElement("p");
-        bookprice.innerHTML = `${localStorage.getItem("price")}`;
+        bookprice.innerHTML = "Price:  " + `${localStorage.getItem("price")}`;
         displaySection.append(bookprice);
         document.getElementById("updateISBN").textContent = localStorage.getItem("isbn");
         $("#submitUpdate").on("click", updateBook);

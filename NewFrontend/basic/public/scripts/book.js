@@ -2,7 +2,7 @@
 
     "use strict";
     let book;
-    const apiUrl = `http://137.112.104.117:3000/db/books/`;
+    const apiUrl = `http://137.112.104.119:3000/db/books/`;
     function getAllBooks() {
         localStorage.setItem("searchByAuthor","0");
         localStorage.setItem("searchByTitle","0");
@@ -28,9 +28,9 @@
                         window.location = "./book.html";
                         displayBook(data);
                     }
-                    // else{
-                    //     window.location = "./warning.html";
-                    // }
+                    else{
+                        alert("cannot get isbn");
+                    }
                     
                 },
                 error: (request, status, error) => {
@@ -39,30 +39,27 @@
                 }
             });
         }
-        if(title != ""){
+        else if(title != ""){
             localStorage.setItem("title",title);
-            //localStorage.setItem("searchByAuthor","0");
+            localStorage.setItem("searchByAuthor","0");
             localStorage.setItem("searchByTitle","1");
             localStorage.setItem("findAll","0");
-        }else{
-            localStorage.setItem("searchByTitle","0");
-        }
-        if(author != ""){
+            window.location = "./searchpage.html";
+        }else if(author != ""){
             localStorage.setItem("author",author);
             localStorage.setItem("searchByAuthor","1");
-            //localStorage.setItem("searchByTitle","0");
+            localStorage.setItem("searchByTitle","0");
             localStorage.setItem("findAll","0");
-            
+            window.location = "./searchpage.html";   
         }else{
-            localStorage.setItem("searchByAuthor","0");
+            alert("Please enter something for search");
         }
-        window.location = "./searchpage.html";
+        
     }
 
 
 
     function addBook() {
-
         const isbn = document.getElementById("addISBN").value;
         const title = document.getElementById("addTitle").value;
         const author = document.getElementById("addAuthor").value;
@@ -91,6 +88,7 @@
             dataType: "JSON",
             success: (data) => {
                 if (data) {
+                    console.log(data);
                     console.log("Put succeed");
                 } else {
                     console.log("cannot put");

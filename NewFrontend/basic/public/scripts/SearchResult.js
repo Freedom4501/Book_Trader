@@ -59,11 +59,13 @@
         for (var i = 0; i < data.length; i++) {
             var currRow = displaySection.insertRow(i);
             var titleCell = currRow.insertCell(0);
-            titleCell.innerHTML = data[i].title; 
+            titleCell.innerHTML = data[i].title + "  "; 
             var authorCell = currRow.insertCell(1);
-            authorCell.innerHTML = data[i].author; 
+            authorCell.innerHTML = data[i].author + "  "; 
             var isbnCell = currRow.insertCell(2);
-            isbnCell.innerHTML = data[i].isbn; 
+            isbnCell.innerHTML = data[i].isbn  + "  "; 
+            var priceCell = currRow.insertCell(3);
+            priceCell.innerHTML = data[i].price;
             currRow.onclick = rowClick;
         }
     }
@@ -72,6 +74,7 @@
         localStorage.setItem("title",this.cells[0].innerHTML);
         localStorage.setItem("isbn",this.cells[2].innerHTML);
         localStorage.setItem("author",this.cells[1].innerHTML);
+        localStorage.setItem("price", this.cells[3].innerHTML);
         window.location = "./book.html";
     }
 

@@ -75,13 +75,6 @@ router.route('/books/isbn/:isbn')
             }
         });
     })
-    // UPDATE a book by isbn
-    /*  [Middleware] Use containsISBN middleware in this
-        new version of update that queries the database once. 
-        Introduces null values in database.
-    */
-    
-
     .put(containsISBN, (req, res) => {
         // console.log(req)
         var authors = req.body.author;
@@ -108,9 +101,6 @@ router.route('/books/isbn/:isbn')
                 }
             });
     })
-
-    // DELETE a book by isbn
-    /*  [Middleware] Use containsISBN middleware */
     .delete(containsISBN, (req, res) => {
         Book.findOneAndRemove({"isbn": req.isbn})
             .exec((err) => {
