@@ -101,6 +101,9 @@
     const profilePhone = document.createElement("p");
     profilePhone.innerHTML = 'Phone:  ' + `${localStorage.getItem("PhoneLogin")}`;
     displaySection.append(profilePhone);
+    document.getElementById("inputNewName").value = localStorage.getItem("NameLogin");
+    document.getElementById("inputNewPhone").value = localStorage.getItem("PhoneLogin");
+    document.getElementById("inputNewEmail").value = localStorage.getItem("EmailLogin");
     $("#submitUpdateProfile").on("click", updateProfile);
     $("#submitUpdatePassword").on("click", updatePassword);
     $("#submitDeleteProfile").on("click", deleteProfile);
