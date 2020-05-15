@@ -38,10 +38,6 @@
         });
     }
 
-    function getCart(){
-        window.location = "./cart.html";
-    }
-
     $(document).ready(function () {
         let displaySection = $("#titleContainer");
         const bookTitle = document.createElement("h2");

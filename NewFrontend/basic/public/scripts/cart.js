@@ -3,31 +3,31 @@
 
   const driver = neo4j.driver('bolt://lim5.csse.rose-hulman.edu:7687', neo4j.auth.basic('neo4j', '000201'));
   const session = driver.session();
+  const apiUrl = `http://137.112.104.119:3000/db/books/`;
 
 
-  function addToCart(){
+ function addToCart(){
     console.log("Adding to cart!");
-    const isbn = document.getElementById("inputCartISBN").value;
-    const username = localStorage.getItem("UsernameLogin");
-    // var result;
-    // for(result in session.run(`MATCH (n:Cart) WHERE n.ISBN={isbn} AND n.username={username} RETURN count(n) as num`,{isbn, username})){
-    //   if(result['num'] > 0){
-    //     console.log("You have already added this item to your cart.");
-    //     return;
-    //   }
-    // }
-    
+    var isbn = document.getElementById("inputCartISBN").value;
+    var username = localStorage.getItem("UsernameLogin");
+
     if(username == ''){
-      console.log("Please login before using shopping cart");
+      console.log("Not logged in");
+      alert("Please login before using the shopping cart!")
       return;
     }
     else if(isbn == ''){
       console.log("Please select which book to add to cart");
+      alert("Please select which book to add to cart!")
       return;
-    }
-    else {
-      session.run(`CREATE (n:Cart {ISBN:{isbn}, username:{username}})`, {isbn, username});
-      console.log("Add complete!");
+    } else {
+      session.run(`CREATE (b:Book{ISBN:{isbn}})-[r:IN_CART]->(u:User{username:{username}}) RETURN count(r) AS num`, {isbn, username}).then((result) => {
+        if(result.records[0].get("num")>= 1){
+          console.log("Successfully added book "+isbn+" to "+username+"'s cart!");
+        }
+        localStorage.setItem("in_cart_isbn", isbn);
+        findBookAndDisplay(isbn);
+      });
     }
   }
 
@@ -35,31 +35,58 @@
     console.log("Deleting from cart!");
     const isbn = document.getElementById("deleteCartISBN").value;
     const username = localStorage.getItem("UsernameLogin");
-    // const record = session.run(`MATCH (n:Cart) WHERE n.isbn={isbn} AND n.username={username} RETURN count(n) as num`,{isbn, username});
-    
-    // if(record[0] == 0){
-    //   console.log("This item does not exist in your cart");
-    //   return;
-    // }
     if(username == ''){
       console.log("Please login before using shopping cart");
+      alert("Please login before using the shopping cart!")
       return;
     }
     else if(isbn == ''){
       console.log("Please select which book to delete from cart");
+      alert("Please select which book to delete from cart");
       return;
     }
     else {
-      session.run(`MATCH (n:Cart) WHERE n.ISBN={isbn} AND n.username={username} DELETE n`, {isbn, username});
+      session.run(`MATCH (b:Book{ISBN:{isbn}})-[r:IN_CART]->(u:User{username:{username}}) DELETE r RETURN count(r) AS num`, {isbn, username}).then((result) => {
+        if(result.records[0].get("num")== 0){
+          console.log("Successfully deleted book "+isbn+" from "+username+"'s cart!");
+        }
+      });
       console.log("delete complete")
     }
   }
+  function findBookAndDisplay(isbn){
+    $.ajax ({
+      url: apiUrl,
+      // url:  `${apiUrl}isbn/${localStorage.getItem("in_cart_isbn")}/`,
+      type: "GET",
+      success: (data) => {
+          console.log(data);
+          displayCart(data);
+      },  
+      error: (request, status, error) => {
+          window.location = "./404.html";
+          console.log(error);
+      }
+  });
+  }
+  
+  function displayCart(data) {
+    const displaySection = document.getElementById("cartList");
+    for (var i = 0; i < data.length; i++) {
+        var currRow = displaySection.insertRow(i);
+        var titleCell = currRow.insertCell(0);
+        titleCell.innerHTML = data[i].title; 
+        var authorCell = currRow.insertCell(1);
+        authorCell.innerHTML = data[i].author; 
+        var isbnCell = currRow.insertCell(2);
+        isbnCell.innerHTML = data[i].isbn; 
+        currRow.onclick = rowClick;
+    }
+}
 
   
   $(document).ready(function () {
     console.log("In cart!");
-    // $("#submitRegister").on("click", addUser());
-    // $("#submitLogin").on("click", login());
     $("#submitAddCartItem").on("click", addToCart);
     $("#submitDeleteCartItem").on("click", deleteFromCart);
   });
