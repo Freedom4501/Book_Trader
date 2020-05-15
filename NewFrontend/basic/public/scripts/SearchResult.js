@@ -150,6 +150,34 @@
     }
 
 
+    function sortByTitle() {
+        const displaySection = document.getElementById("bucketList");
+        displaySection.innerHTML = '';
+        if (localStorage.getItem("searchByTitle") == "1") {
+            searchTitle2("title");
+        } else if (localStorage.getItem("searchByAuthor") == "1") {
+            searchAuthor2("title");
+        } else if (localStorage.getItem("findAll") == "1") {
+            findAll2("title");
+        } else {
+            searchPrice2("title");
+        }
+    }
+
+    function sortByPrice() {
+        const displaySection = document.getElementById("bucketList");
+        displaySection.innerHTML = '';
+        if (localStorage.getItem("searchByTitle") == "1") {
+            searchTitle2("price");
+        } else if (localStorage.getItem("searchByAuthor") == "1") {
+            searchAuthor2("price");
+        } else if (localStorage.getItem("findAll") == "1") {
+            findAll2("price");
+        } else {
+            searchPrice2("price");
+        }
+    }
+
     function displayBooks(data) {
         const displaySection = document.getElementById("bucketList");
         for (var i = 0; i < data.length; i++) {
@@ -175,13 +203,16 @@
     }
 
     $(document).ready(function () {
-        
+        $("#sortByTitle").on("click", sortByTitle);
+        $("#sortByPrice").on("click", sortByPrice);
         if (localStorage.getItem("searchByTitle") == "1") {
             searchTitle();
         } else if (localStorage.getItem("searchByAuthor") == "1") {
             searchAuthor();
         } else if (localStorage.getItem("findAll") == "1") {
             findAll();
+        } else {
+            searchPrice();
         }
         
     });
