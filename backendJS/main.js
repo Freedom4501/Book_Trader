@@ -63,6 +63,34 @@ router.route('/books')
         });
     });
 
+router.route('/books/sort/title')
+    .get((req, res, next) => {
+        Book.find({}, null, {sort: { "title": 1 }}, (err, books) => {
+            if (err) {
+                res.status(400);
+                handleError(err, res, 'Could not find any books.');
+                return;
+            } else {
+                res.status(200);
+                res.json(books);
+            }
+        });
+    })
+
+router.route('/books/sort/price')
+    .get((req, res, next) => {
+        Book.find({}, null, {sort: { "price": 1 }}, (err, books) => {
+            if (err) {
+                res.status(400);
+                handleError(err, res, 'Could not find any books.');
+                return;
+            } else {
+                res.status(200);
+                res.json(books);
+            }
+        });
+    })
+
 router.route('/books/isbn/:isbn')
     .get((req, res, next) => {
         Book.findOne({'isbn': req.params.isbn}, function (err, book) {
@@ -161,6 +189,32 @@ router.route('/books/title/:title')
             });
     });
 
+router.route('/books/title/:title/sort/title')
+    .get((req, res, next) => {
+        Book.find({'title': req.params.title}, null, {sort: { "title": 1 }}, function (err, book) {
+            if (err) {
+                res.status(404);
+                handleError(new Error(), res, "Invalid title provided");
+                
+            } else {
+                res.json(book);
+            }
+
+        });
+    });
+router.route('/books/title/:title/sort/price')
+    .get((req, res, next) => {
+        Book.find({'title': req.params.title}, null, {sort: { "price": 1 }}, function (err, book) {
+            if (err) {
+                res.status(404);
+                handleError(new Error(), res, "Invalid title provided");
+                
+            } else {
+                res.json(book);
+            }
+
+        });
+    });
 
 router.route('/books/author/:author')
     .get((req, res, next) => {
@@ -174,6 +228,65 @@ router.route('/books/author/:author')
         });
     });
 
+router.route('/books/author/:author/sort/title')
+    .get((req, res, next) => {
+        Book.find({'author': req.params.author}, null, {sort: { "title": 1 }}, function (err, book) {
+            if (err) {
+                res.status(404);
+                handleError(new Error(), res, "Invalid author provided");
+            } else {
+                res.json(book);
+            }
+        });
+    });
+
+router.route('/books/author/:author/sort/price')
+    .get((req, res, next) => {
+        Book.find({'author': req.params.author}, null, {sort: { "price": 1 }}, function (err, book) {
+            if (err) {
+                res.status(404);
+                handleError(new Error(), res, "Invalid author provided");
+            } else {
+                res.json(book);
+            }
+        });
+    });
+
+router.route('/books/gt/:gt/lt/:lt')
+    .get((req, res, next) => {
+        Book.find({$and: [{"price":{$gt:req.params.gt}},{"price":{$lt:req.params.lt}}]}, function (err, book) {
+            if (err) {
+                res.status(404);
+                handleError(new Error(), res, "Invalid author provided");
+            } else {
+                res.json(book);
+            }
+        });
+    });
+
+router.route('/books/gt/:gt/lt/:lt/sort/title')
+    .get((req, res, next) => {
+        Book.find({$and: [{"price":{$gt:req.params.gt}},{"price":{$lt:req.params.lt}}]}, null, {sort: { "title": 1 }}, function (err, book) {
+            if (err) {
+                res.status(404);
+                handleError(new Error(), res, "Invalid author provided");
+            } else {
+                res.json(book);
+            }
+        });
+    });
+
+router.route('/books/gt/:gt/lt/:lt/sort/price')
+    .get((req, res, next) => {
+        Book.find({$and: [{"price":{$gt:req.params.gt}},{"price":{$lt:req.params.lt}}]}, null, {sort: { "price": 1 }}, function (err, book) {
+            if (err) {
+                res.status(404);
+                handleError(new Error(), res, "Invalid author provided");
+            } else {
+                res.json(book);
+            }
+        });
+    });
 
 function containsTitle(req, res, next) {
     if (!req.params || !req.params.title) {
