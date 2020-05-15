@@ -132,7 +132,8 @@
             error: (request, status, error) => {
                 window.location = "./404.html";
                 console.log(error);
-            });
+            }
+        });
     }
 
     function searchAuthor2(sortBy) {
