@@ -56,7 +56,27 @@
       </div>
     </div>
   </div>
-
+  <div class="modal fade" id="cancelOrderDialog" tabindex="-1" role="dialog" aria-labelledby="cancelOrder"
+  aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Cancel Order</h5>
+        </div>
+        <div class="modal-body">
+          <div class="form-group row">
+            <label for="inputISBN" class="col-sm-2 control-label">ISBN:</label>
+            <div class="col-sm-10">
+              <input type="text" id="cancelISBN" class="form-control" placeholder="input ISBN">
+            </div>
+          </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-dark" data-dismiss="modal">CANCEL</button>
+          <button type="button" id="cancelPurchase" class="btn btn-outline-dark" data-dismiss="modal">CANCEL Order</button>
+        </div>
+      </div>
+    </div>
+  </div>
     <div class="modal fade" id="loginDialog" tabindex="-1" role="dialog" aria-labelledby="login"
     aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered" role="document">
@@ -86,6 +106,8 @@
         </div>
       </div>
     </div>
+
+    
 
     
     
