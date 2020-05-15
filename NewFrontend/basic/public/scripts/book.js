@@ -1,6 +1,7 @@
 (function () {
-
     "use strict";
+    const driver = neo4j.driver('bolt://lim5.csse.rose-hulman.edu:7687', neo4j.auth.basic('neo4j', '000201'));
+    const session = driver.session();
     let book;
     const apiUrl = `http://137.112.104.119:3000/db/books/`;
     function getAllBooks() {
@@ -69,6 +70,12 @@
 
 
     function addBook() {
+        var username = localStorage.getItem("UsernameLogin");
+        if(username == '' || username =null){
+            console.log("Not logged in");
+            alert("Please login before using the shopping cart!")
+            return;
+        }
         const isbn = document.getElementById("addISBN").value;
         const title = document.getElementById("addTitle").value;
         const author = document.getElementById("addAuthor").value;

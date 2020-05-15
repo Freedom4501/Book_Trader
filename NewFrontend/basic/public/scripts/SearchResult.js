@@ -35,6 +35,7 @@
             }
         });
     }
+    
 
     function searchTitle() {
         $.ajax ({
@@ -53,12 +54,10 @@
             }
         });
     }
-
     function searchTitle2(sortBy) {
         $.ajax ({
             url: `${apiUrl}title/${localStorage.getItem("title")}/sort/${sortBy}`,
             type: "GET",
-
             success: (data) => {
                 console.log(data);
                 console.log(data.length);
@@ -75,18 +74,15 @@
     function searchPrice() {
         var gt = localStorage.getItem("gt");
         var lt = localStorage.getItem("lt");
-
         if (gt == "") {
             gt = 0;
         }
         if (lt == "") {
             lt = Number.MAX_SAFE_INTEGER;
         }
-
         $.ajax ({
             url: `${apiUrl}gt/${gt}/lt/${lt}/`,
             type: "GET",
-
             success: (data) => {
                 console.log(data);
                 book = data;
@@ -99,21 +95,19 @@
         });
     }
 
+
     function searchPrice2(sortBy) {
         var gt = localStorage.getItem("gt");
         var lt = localStorage.getItem("lt");
-
         if (gt == "") {
             gt = 0;
         }
         if (lt == "") {
             lt = Number.MAX_SAFE_INTEGER;
         }
-
         $.ajax ({
             url: `${apiUrl}gt/${gt}/lt/${lt}/sort/${sortBy}/`,
             type: "GET",
-
             success: (data) => {
                 console.log(data);
                 book = data;
@@ -139,14 +133,11 @@
                 window.location = "./404.html";
                 console.log(error);
             }
-        });
     }
-
     function searchAuthor2(sortBy) {
         $.ajax ({
             url: `${apiUrl}author/${localStorage.getItem("author")}/sort/${sortBy}`,
             type: "GET",
-
             success: (data) => {
                 console.log(data);
                 displayBooks(data);
@@ -158,16 +149,17 @@
         });
     }
 
+
     function displayBooks(data) {
         const displaySection = document.getElementById("bucketList");
         for (var i = 0; i < data.length; i++) {
             var currRow = displaySection.insertRow(i);
             var titleCell = currRow.insertCell(0);
-            titleCell.innerHTML = data[i].title + "  "; 
+            titleCell.innerHTML = data[i].title; 
             var authorCell = currRow.insertCell(1);
-            authorCell.innerHTML = data[i].author + "  "; 
+            authorCell.innerHTML = data[i].author; 
             var isbnCell = currRow.insertCell(2);
-            isbnCell.innerHTML = data[i].isbn  + "  "; 
+            isbnCell.innerHTML = data[i].isbn; 
             var priceCell = currRow.insertCell(3);
             priceCell.innerHTML = data[i].price;
             currRow.onclick = rowClick;
@@ -182,46 +174,14 @@
         window.location = "./book.html";
     }
 
-    function sortByTitle() {
-        const displaySection = document.getElementById("bucketList");
-        displaySection.innerHTML = '';
-        if (localStorage.getItem("searchByTitle") == "1") {
-            searchTitle2("title");
-        } else if (localStorage.getItem("searchByAuthor") == "1") {
-            searchAuthor2("title");
-        } else if (localStorage.getItem("findAll") == "1") {
-            findAll2("title");
-        } else {
-            searchPrice2("title");
-        }
-    }
-
-    function sortByPrice() {
-        const displaySection = document.getElementById("bucketList");
-        displaySection.innerHTML = '';
-        if (localStorage.getItem("searchByTitle") == "1") {
-            searchTitle2("price");
-        } else if (localStorage.getItem("searchByAuthor") == "1") {
-            searchAuthor2("price");
-        } else if (localStorage.getItem("findAll") == "1") {
-            findAll2("price");
-        } else {
-            searchPrice2("price");
-        }
-    }
-
     $(document).ready(function () {
-        $("#sortByTitle").on("click", sortByTitle);
-        $("#sortByPrice").on("click", sortByPrice);
-
+        
         if (localStorage.getItem("searchByTitle") == "1") {
             searchTitle();
         } else if (localStorage.getItem("searchByAuthor") == "1") {
             searchAuthor();
         } else if (localStorage.getItem("findAll") == "1") {
             findAll();
-        } else {
-            searchPrice();
         }
         
     });

@@ -5,18 +5,19 @@
   const session = driver.session();
   const apiUrl = `http://137.112.104.119:3000/db/books/`;
 
+  var in_cart_books = [];
 
  function addToCart(){
     console.log("Adding to cart!");
     var isbn = document.getElementById("inputCartISBN").value;
     var username = localStorage.getItem("UsernameLogin");
 
-    if(username == ''){
+    if(username == '' || username == null){
       console.log("Not logged in");
       alert("Please login before using the shopping cart!")
       return;
     }
-    else if(isbn == ''){
+    else if(isbn == ''||isbn ==null){
       console.log("Please select which book to add to cart");
       alert("Please select which book to add to cart!")
       return;
@@ -25,6 +26,8 @@
         if(result.records[0].get("num")> 1){
           console.log("Successfully added book "+isbn+" to "+username+"'s cart!");
         }
+        in_cart_books.push(isbn);
+        localStorage.setItem("in_cart_isbn", in_cart_books);
       });
     }
   }
@@ -52,39 +55,13 @@
       console.log("delete complete")
     }
   }
-
-  function searchForISBN(){
-    console.log("Searching for ISBN");
-    const username = localStorage.getItem("UsernameLogin");
-    if(username == ''){
-      console.log("empty username");
-      return;
-    }
-    else if(username == null){
-      console.log("user has logged out");
-      return;
-    }
-    else{
-      session.run(`MATCH (b:Book)-[r:IN_CART]->(u:User{username:{username}}) RETURN b.ISBN as isbn, count(r) as num`, {username}).then((result) => {
-          if(result.records[0].get("isbn") == ''){
-            console.log("No book in cart");
-          } else {
-              result.records.forEach(element => {
-                findBookAndDisplay(element.get('isbn'));
-              });
-          }
-      });
-    }
-  }
-
+  
   function findBookAndDisplay(isbn){
     $.ajax ({
-      //url: apiUrl,
-      url: `${apiUrl}isbn/${isbn}`,
+      url: `${apiUrl}isbn/${localStorage.getItem("isbn")}`,
       // url:  `${apiUrl}isbn/${localStorage.getItem("in_cart_isbn")}/`,
       type: "GET",
       success: (data) => {
-          console.log(isbn);
           console.log(data);
           displayCart(data);
       },  
@@ -97,17 +74,18 @@
   
   function displayCart(data) {
     const displaySection = document.getElementById("cartList");
-      var currRow = displaySection.insertRow();
+    for (var i = 0; i < data.length; i++) {
+      var currRow = displaySection.insertRow(i);
       var titleCell = currRow.insertCell(0);
-      titleCell.innerHTML = data.title; 
+      titleCell.innerHTML = data[i].title + "  "; 
       var authorCell = currRow.insertCell(1);
-      authorCell.innerHTML = data.author; 
+      authorCell.innerHTML = data[i].author + "  "; 
       var isbnCell = currRow.insertCell(2);
-      isbnCell.innerHTML = data.isbn; 
+      isbnCell.innerHTML = data[i].isbn  + "  "; 
       var priceCell = currRow.insertCell(3);
-      priceCell.innerHTML = data.price;
+      priceCell.innerHTML = data[i].price;
       currRow.onclick = rowClick;
-  
+    }
   }
 
   function rowClick() {
@@ -122,8 +100,9 @@
   
   $(document).ready(function () {
     console.log("In cart!");
-    searchForISBN();
-    
+    for(isbn in in_cart_books){
+      findBookAndDisplay(isbn);
+    }
     $("#submitAddCartItem").on("click", addToCart);
     $("#submitDeleteCartItem").on("click", deleteFromCart);
   });
