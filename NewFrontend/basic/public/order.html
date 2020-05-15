@@ -20,6 +20,7 @@
       <div class="dropdown-menu dropdown-menu-right">
         <button id="loginBtn" class="dropdown-item" type="button" data-toggle="modal" data-target="#loginDialog">LOGIN</button>
         <button id="registerBtn" class="dropdown-item" type="button" data-toggle="modal" data-target="#registerDialog">REGISTER</button>
+        <button id="addOrderBtn" class="dropdown-item" type="button" data-toggle="modal" data-target="#addOrderDialog">AddToOrder</button>
       </div>
     </div>
   </nav>
@@ -34,7 +35,27 @@
     </table>
   </div>
 
-
+  <div class="modal fade" id="addOrderDialog" tabindex="-1" role="dialog" aria-labelledby="addOrder"
+  aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Add Order</h5>
+        </div>
+        <div class="modal-body">
+          <div class="form-group row">
+            <label for="inputISBN" class="col-sm-2 control-label">ISBN:</label>
+            <div class="col-sm-10">
+              <input type="text" id="inputISBN" class="form-control" placeholder="input ISBN">
+            </div>
+          </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-dark" data-dismiss="modal">CANCEL</button>
+          <button type="button" id="submitPurchase" class="btn btn-outline-dark" data-dismiss="modal">PURCHASE</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
     <div class="modal fade" id="loginDialog" tabindex="-1" role="dialog" aria-labelledby="login"
     aria-hidden="true">
