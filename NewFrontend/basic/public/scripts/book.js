@@ -51,14 +51,15 @@
             localStorage.setItem("searchByTitle","0");
             localStorage.setItem("findAll","0");
             window.location = "./searchpage.html";   
+        }else{
+            alert("Please enter something for search");
         }
-        alert("Please enter something for search");
+        
     }
 
 
 
     function addBook() {
-
         const isbn = document.getElementById("addISBN").value;
         const title = document.getElementById("addTitle").value;
         const author = document.getElementById("addAuthor").value;
@@ -83,10 +84,11 @@
         $.ajax ({
             url: apiUrl,
             type: "POST",
-            data: {"title": title, "author": author, "isbn": isbn, "price": +(price)}, 
+            data: {"title": title, "author": author, "isbn": isbn, "price": price}, 
             dataType: "JSON",
             success: (data) => {
                 if (data) {
+                    console.log(data);
                     console.log("Put succeed");
                 } else {
                     console.log("cannot put");

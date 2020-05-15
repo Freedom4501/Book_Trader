@@ -17,6 +17,7 @@
             console.log(doc);
             if(doc.Password!=password){
                 console.log("Login Failed");
+                alert("Login Fails: check your username and password.");
                 return;
             }else{
                 localStorage.setItem("UsernameLogin", username);
@@ -26,7 +27,7 @@
                 window.location = "./profile.html";
             }
         });
-        alert("Login Fails: check your username and password.");
+
         
     }
 
