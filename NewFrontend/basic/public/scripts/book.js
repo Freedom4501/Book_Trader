@@ -2,7 +2,8 @@
     "use strict";
     let book;
     const apiUrl = `http://137.112.104.119:3000/db/books/`;
-
+    const driver = neo4j.driver('bolt://lim5.csse.rose-hulman.edu:7687', neo4j.auth.basic('neo4j', '000201'));
+    const session = driver.session();
     function getAllBooks() {
         localStorage.setItem("searchByAuthor","0");
         localStorage.setItem("searchByTitle","0");
@@ -68,6 +69,10 @@
 
 
     function addBook() {
+        const username = localStorage.getItem("UsernameLogin");
+        if(username==null){
+            alert("Login First Please");
+        }
         const isbn = document.getElementById("addISBN").value;
         const title = document.getElementById("addTitle").value;
         const author = document.getElementById("addAuthor").value;
@@ -106,6 +111,13 @@
                             if (data2) {
                                 console.log(data2);
                                 console.log("Put succeed");
+                                session.run(`Match (n:User {username: {username}}) Create(b:Book{ISBN: {isbn}}) Create (n)-[:SELL]->(b) return count(b) as num`, {username,isbn}).then((result) => {
+                                    if(result.records[0].get("num") > 0){
+                                        console.log("Successfully add book to sell");
+                                    }else{
+                                        alert("Failed to add book node in neo4j");
+                                    }
+                                  });
                             } else {
                                 console.log("cannot put");
                                 alert("add book fails");
@@ -140,7 +152,7 @@
     }
 
     function getOrder(){
-        window.location="./order.html";
+        window.location="./cart.html";
     }
 
     $(document).ready(function () {

@@ -2,7 +2,8 @@
 
     "use strict";
     const apiUrl = `http://137.112.104.119:3000/db/books/`;
-    
+    const driver = neo4j.driver('bolt://lim5.csse.rose-hulman.edu:7687', neo4j.auth.basic('neo4j', '000201'));
+    const session = driver.session();
     function updateBook() {
         const title = document.getElementById("updateTitle").value;
         const author = document.getElementById("updateAuthor").value;
@@ -29,6 +30,11 @@
             type: "DELETE",
             success: (data) => {
                 console.log(data);
+                session.run(`MATCH (b:Book {ISBN:{isbn}} ) DETACH DELETE b RETURN count(b) AS num`, {isbn}).then((result) => {
+                    if(result.records[0].get("num")== 0){
+                      console.log("Successfully deleted book "+ isbn);
+                    }
+                  });
                 window.location = "./index.html";
             },
             error: (request, status, error) => {
