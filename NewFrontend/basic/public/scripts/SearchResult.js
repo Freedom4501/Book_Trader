@@ -182,8 +182,17 @@
 
     function displayBooks(data) {
         const displaySection = document.getElementById("bucketList");
+        var currRow = displaySection.insertRow(0);
+        var titleCell = currRow.insertCell(0);
+        titleCell.innerHTML = "Title"; 
+        var authorCell = currRow.insertCell(1);
+        authorCell.innerHTML = "Author"; 
+        var isbnCell = currRow.insertCell(2);
+        isbnCell.innerHTML = "ISBN"; 
+        var priceCell = currRow.insertCell(3);
+        priceCell.innerHTML = "Price";
         for (var i = 0; i < data.length; i++) {
-            var currRow = displaySection.insertRow(i);
+            var currRow = displaySection.insertRow(i+1);
             var titleCell = currRow.insertCell(0);
             titleCell.innerHTML = data[i].title; 
             var authorCell = currRow.insertCell(1);
