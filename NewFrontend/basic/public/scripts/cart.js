@@ -40,7 +40,6 @@
       return;
     }
     else {
-      
       session.run(`MATCH (b:Book{ISBN:{isbn}})-[r:IN_CART]->(u:User{username:{username}}) DELETE r RETURN count(r) AS num`, {isbn, username}).then((result) => {
         if(result.records[0].get("num")== 0){
           console.log("Successfully deleted book "+isbn+" from "+username+"'s cart!");
@@ -53,7 +52,6 @@
   function findBookAndDisplay(isbn){
     $.ajax ({
       url: `${apiUrl}isbn/${isbn}`,
-      // url:  `${apiUrl}isbn/${localStorage.getItem("in_cart_isbn")}/`,
       type: "GET",
       success: (data) => {
           console.log(isbn);  
@@ -73,7 +71,7 @@
       type: "GET",
       success: (data) => {
         if(data != null){
-          trackUser(username);
+          trackUser(isbn,username);
         } else {
           alert("Can not get ISBN");
           console.log("This book does not exist");
@@ -86,15 +84,19 @@
   });
   }
   
-  function trackUser(username){
-    couchdb.get(username).then((result) => {
-      if(result != null){
+  function trackUser(isbn, username){
+    couchdb.get(username, function(error, result) {
+      if(error){
+        console.log("No such user");
+        return;
+      }
+      else {
+        console.log("Found user");
+        console.log(isbn);
+        console.log(username);
+        console.log(result);
         executeAddBook(isbn, username);
       }
-      console.log("Invalid username");
-    }).catch((err) => {
-      window.location = "./404.html";
-      console.log(err);
     });
   }
   
@@ -109,7 +111,6 @@
   function displayCart(data) {
     const displaySection = document.getElementById("cartList");
       var currRow = displaySection.insertRow();
-
       var titleCell = currRow.insertCell(0);
       titleCell.innerHTML = data.title; 
       var authorCell = currRow.insertCell(1);
@@ -157,7 +158,7 @@
   
   $(document).ready(function () {
     console.log("In cart!");
-    // searchForISBN();
+    searchForISBN();
     $("#submitAddCartItem").on("click", addToCart);
     $("#submitDeleteCartItem").on("click", deleteFromCart);
   });
