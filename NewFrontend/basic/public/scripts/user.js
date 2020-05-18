@@ -1,5 +1,8 @@
 (function () {
     "use strict";
+    
+    const driver = neo4j.driver('bolt://lim5.csse.rose-hulman.edu:7687', neo4j.auth.basic('neo4j', '000201'));
+    const session = driver.session();
     var couchdb = new PouchDB('http://lim5:000201@137.112.104.118:5984/users');
     function login() {
         const username = document.getElementById("inputUsername").value;
@@ -119,8 +122,17 @@
             couchdb.put(doc, function(err, response) {
                 if (err) {
                     return console.log(err);
+                    alert("Cannot Create the user. The Username might be occupied.")
                 } else {
                     console.log("Document created Successfully");
+                    session.run(`create(n:User {username:{username}}) Return count(n) as num`, {username}).then((result) => {
+                        if(result.records[0].get("num") > 0){
+                            console.log("Successfully add user");
+                        }else{
+                            alert("failed to add node in neo4j");
+                        }
+                      });
+
                 }
             });
         }
