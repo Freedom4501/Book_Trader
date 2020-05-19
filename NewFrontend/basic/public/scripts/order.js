@@ -95,7 +95,7 @@
         console.log("Login before user order");
         return;
       } else {
-        session.run(`MATCH (u1:User)-[r1:SELL]->(b:Book)<-[r:PURCHASE]-(u:User{username:{username}}) RETURN count(b) as num, b.ISBN as isbn, u1.username as seller`, {username}).then((result) => {
+        session.run(`MATCH (u1:User)-[r1:SELL]->(b:Book)<-[r:PURCHASE]-(u:User{username:{username}}) RETURN count(b) as num, b.ISBN as isbn, u1.username as seller, r.quantity as quant`, {username}).then((result) => {
           if(result.records[0].get('num') == 0){
             console.log("Book not found");
             return;
@@ -103,23 +103,24 @@
             console.log("Seller not found");
             return;
           } else {
+            
             result.records.forEach(element => {
               console.log(element.get('isbn'));
               console.log(element.get('seller'));
-              findBookAndDisplay(element.get('isbn'), element.get('seller'));
+              findBookAndDisplay(element.get('isbn'), element.get('seller'), element.get('quant'));
             });
           }
         });
       }
     }
   
-    function findBookAndDisplay(isbn, username){
+    function findBookAndDisplay(isbn, username, quantity){
       $.ajax ({
         url: `${apiUrl}isbn/${isbn}`,
         type: "GET",
         success: (data) => {
             console.log(data);
-            displayOrder(data, username);
+            displayOrder(data, username, quantity);
         },  
         error: (request, status, error) => {
             window.location = "./404.html";
@@ -128,7 +129,7 @@
     });
     }
   
-    function displayOrder(data, username) {
+    function displayOrder(data, username, quantity) {
       const displaySection = document.getElementById("orderList");
       var currRow = displaySection.insertRow();
       var titleCell = currRow.insertCell(0);
@@ -141,6 +142,8 @@
       priceCell.innerHTML = data.price;
       var sellerCell = currRow.insertCell(4);
       sellerCell.innerHTML = username;
+      var quantityHTML = currRow.insertCell(5);
+      quantityHTML.innerHTML = quantity;
     }
   
     function searchForOrder(){
@@ -165,7 +168,6 @@
               return
             } else {
               findOrderAndDisplay(username);
-              
             }
         });
       }
@@ -207,6 +209,20 @@
     
     $(document).ready(function () {
       console.log("start order");
+      const displaySection = document.getElementById("orderList");
+      var currRow = displaySection.insertRow(0);
+      var titleCell = currRow.insertCell(0);
+      titleCell.innerHTML = "Title"; 
+      var authorCell = currRow.insertCell(1);
+      authorCell.innerHTML = "Author"; 
+      var isbnCell = currRow.insertCell(2);
+      isbnCell.innerHTML = "ISBN"; 
+      var priceCell = currRow.insertCell(3);
+      priceCell.innerHTML = "Price";
+      var sellerCell = currRow.insertCell(4);
+      sellerCell.innerHTML = "Seller"; 
+      var quantityCell = currRow.insertCell(5);
+      quantityCell.innerHTML = "Quantity";
       searchForOrder();
 
       // $("#submitPurchase").on("click", addOrder);

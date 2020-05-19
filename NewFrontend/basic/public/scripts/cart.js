@@ -155,11 +155,65 @@
       });
     }
   }
+
+  function buyBook(){
+    console.log("Buying book!");
+    var username = localStorage.getItem("UsernameLogin");
+    var isbn = document.getElementById("inputBuyBook").value;
+    var quantity = document.getElementById("inputBuyQuantity").value;
+    var address = document.getElementById("inputBuyAddress").value;
+    if(username == '' || username == null){
+      console.log("user not logged in");
+      return;
+    } else if(isbn == '' || isbn == null){
+      alert("ISBN can not be empty!");
+      console.log("Empty ISBN");
+      return;
+    } else if(quantity == '' || quantity < 1){
+      alert("Quantity can not be empty or less than 1!");
+      console.log("Invalid Quantity");
+      return;
+    } else if(address == ""){
+      alert("Address can not be empty!");
+      console.log("Invalid Address");
+      return;
+    } else {
+      session.run(`MATCH (b:Book{ISBN:{isbn}})-[r:IN_CART]->(u:User{username:{username}}) RETURN count(r) as num`, {isbn,username}).then((result) => {
+        if(result.records[0].get("num") < 1){
+          console.log("Book not in cart for purchase");
+          alert("This book is not in the cart!")
+          return;
+        } else {
+          checkOut(username, isbn, quantity, address);
+        }
+      });
+    }
+  }
+
+  function checkOut(username, isbn, quantity, address){
+    session.run(`MATCH (b:Book{ISBN:{isbn}}), (u:User{username:{username}}) CREATE (b)<-[r:PURCHASE{quantity:{quantity}, address:{address}}]-(u) RETURN count(r) as num`,{isbn, username, quantity, address}).then((result) => {
+      if(result.records[0].get("num")<1){
+        console.log("Failed to purchase");
+      } else {
+        alert("Successfully purchased book "+ isbn+"!");
+        deleteAfterPurchase(username, isbn);
+      }
+    });
+  }
+
+  function deleteAfterPurchase(username, isbn){
+    session.run(`MATCH (b:Book{ISBN:{isbn}})-[r:IN_CART]->(u:User{username:{username}}) DELETE r RETURN count(r) AS num`, {isbn, username}).then((result) => {
+      if(result.records[0].get("num")== 0){
+        console.log("Successfully deleted book "+isbn+" from "+username+"'s cart!");
+      }
+    });
+  }
   
   $(document).ready(function () {
     console.log("In cart!");
     searchForISBN();
     $("#submitAddCartItem").on("click", addToCart);
     $("#submitDeleteCartItem").on("click", deleteFromCart);
+    $("#submitBuy").on("click", buyBook);
   });
 })();
