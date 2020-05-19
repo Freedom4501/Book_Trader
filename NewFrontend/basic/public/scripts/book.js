@@ -4,6 +4,7 @@
     const apiUrl = `http://137.112.104.119:3000/db/books/`;
     const driver = neo4j.driver('bolt://lim5.csse.rose-hulman.edu:7687', neo4j.auth.basic('neo4j', '000201'));
     const session = driver.session();
+    var couchdb = new PouchDB('http://lim5:000201@137.112.104.118:5984/users');
     function getAllBooks() {
         localStorage.setItem("searchByAuthor","0");
         localStorage.setItem("searchByTitle","0");

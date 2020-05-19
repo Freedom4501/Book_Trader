@@ -38,14 +38,57 @@
       </div>
       <div id="buttonGroup" class = "container" >
         <div>
-          <button type="button" id="submitAddToCart" class="btn btn-outline-dark" onclick="window.location ='cart.html'">Add to Cart</button>
-          <button type="button" id="submitPurchase" class="btn btn-outline-dark">Buy It</button>
+          <button type="button" id="submitAddToCart" class="btn btn-outline-dark" data-toggle="modal" data-target="#addToCartDialog">Add to Cart</button>
+          <button type="button" id="submitPurchase" class="btn btn-outline-dark"data-toggle="modal" data-target="#buyDialog">Buy It</button>
         </div>
       </div>
     </div>
     
 
-    
+    <div class="modal fade" id="buyDialog" tabindex="-1" role="dialog" aria-labelledby="buy"
+    aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Purchase Book</h5>
+          </div>
+          <div class="modal-body">
+            <div class="form-group row">
+              <label for="inputBuyQuantity" class="col-sm-2 control-label">Quantity:</label>
+              <div class="col-sm-10">
+                <input type="number" id="inputBuyQuantity" class="form-control" placeholder="Amount of books">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="inputBuyAddress" class="col-sm-2 control-label">Address:</label>
+              <div class="col-sm-10">
+                <input type="text" id="inputBuyAddress" class="form-control" placeholder="Shipping address">
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-outline-dark" data-dismiss="modal">CANCEL</button>
+            <button type="button" id="submitBuy" class="btn btn-outline-dark" data-dismiss="modal">PURCHASE</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade" id="addToCartDialog" tabindex="-1" role="dialog" aria-labelledby="addToCart"
+    aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Please Confirm: Do you want to add this book</h5>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-outline-dark" data-dismiss="modal">CANCEL</button>
+            <button type="button" id="submitAddCartItem" class="btn btn-outline-dark" data-dismiss="modal">ADD</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <div class="modal fade" id="updateDialog" tabindex="-1" role="dialog" aria-labelledby="add"
     aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered" role="document">
@@ -96,7 +139,6 @@
   <script src="scripts/bookDetail.js"></script>
   <script src="scripts/main.js"></script>
   <script src="scripts/user.js"></script>
-  <script src="scripts/cart.js"></script>
 </body>
 
 </html>
