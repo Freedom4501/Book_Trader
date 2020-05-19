@@ -16,12 +16,20 @@
       alert("Please login before using the shopping cart!")
       return;
     }
-    else if(isbn == ''|| isbn ==null){
+    else if(isbn == ''|| isbn == null){
       console.log("Please select which book to add to cart");
       alert("Please select which book to add to cart!")
       return;
     } else {
-      trackBook(isbn, username);
+      session.run(`MATCH (b:Book{ISBN:{isbn}})-[r:IN_CART]->(u:User{username:{username}}) RETURN count(r) as num`, {isbn, username}).then((result) => {
+        if(result.records[0].get("num") >= 1){
+          alert("This book is already in your cart!");
+          return;
+        } else {
+          console.log("Passed test");
+          trackBook(isbn, username);
+        }
+      });
     }
   }
 
@@ -211,6 +219,16 @@
   
   $(document).ready(function () {
     console.log("In cart!");
+    const displaySection = document.getElementById("cartList");
+    var currRow = displaySection.insertRow(0);
+    var titleCell = currRow.insertCell(0);
+    titleCell.innerHTML = "Title"; 
+    var authorCell = currRow.insertCell(1);
+    authorCell.innerHTML = "Author"; 
+    var isbnCell = currRow.insertCell(2);
+    isbnCell.innerHTML = "ISBN"; 
+    var priceCell = currRow.insertCell(3);
+    priceCell.innerHTML = "Price";
     searchForISBN();
     $("#submitAddCartItem").on("click", addToCart);
     $("#submitDeleteCartItem").on("click", deleteFromCart);

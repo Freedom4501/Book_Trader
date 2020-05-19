@@ -25,30 +25,30 @@
   //     }
   //   }
   
-  //   function cancelOrder(){
-  //     console.log("CANCEL ORDER ");
-  //     const isbn = document.getElementById("cancelISBN").value;
-  //     const username = localStorage.getItem("UsernameLogin");
-  //     if(username == ''){
-  //       console.log("Please login before canceling");
-  //       alert("Please login before canceling!")
-  //       return;
-  //     }
-  //     else if(isbn == ''){
-  //       console.log("Please select which book to cancel");
-  //       alert("Please select which book to cancel");
-  //       return;
-  //     }
-  //     else {
-        
-  //       session.run(`MATCH (u:User{username:{username}})-[r:Orders]->(b:Book{ISBN:{isbn}}) DELETE r RETURN count(r) AS num`, {username, isbn}).then((result) => {
-  //         if(result.records[0].get("num")== 0){
-  //           console.log("Successfully cancel book order"+isbn+" from "+username+"'s cart!");
-  //         }
-  //       });
-  //       console.log("delete complete")
-  //     }
-  //   }
+    function cancelOrder(){
+      console.log("canceling order!");
+      const isbn = document.getElementById("cancelISBN").value;
+      const username = localStorage.getItem("UsernameLogin");
+      if(username == '' || username == null){
+        console.log("Please login before canceling");
+        // alert("Please login before canceling!")
+        return;
+      }
+      else if(isbn == '' || isbn == null){
+        console.log("No book order isbn input");
+        alert("Please select which book order to cancel");
+        return;
+      }
+      else {
+        session.run(`MATCH (b:Book{ISBN:{isbn}})<-[r:PURCHASE]-(u:User{username:{username}}) DELETE r RETURN count(r) AS num`, {isbn, username}).then((result) => {
+          if(result.records[0].get("num")== 0){
+            alert("Successfully canceled book order "+isbn+" from "+username+"'s cart!");
+            console.log("Cancel succeeded");
+          }
+        });
+        console.log("delete complete")
+      }
+    }
     
   
   //   function trackBook(isbn, username){
@@ -103,13 +103,13 @@
             console.log("Seller not found");
             return;
           } else {
-            
-            result.records.forEach(element => {
+          
+          result.records.forEach(element => {
               console.log(element.get('isbn'));
               console.log(element.get('seller'));
               findBookAndDisplay(element.get('isbn'), element.get('seller'), element.get('quant'));
-            });
-          }
+          });
+        }
         });
       }
     }
@@ -163,8 +163,6 @@
         session.run(`MATCH (b:Book)<-[r:PURCHASE]-(u:User{username:{username}}) RETURN count(r) as num`, {username}).then((result) => {
             if(result.records[0].get("num") == 0){
               console.log("No Order exists");
-              alarm("You have not yet ordered any book!")
-              window.location = './index.html';
               return
             } else {
               findOrderAndDisplay(username);
@@ -226,7 +224,7 @@
       searchForOrder();
 
       // $("#submitPurchase").on("click", addOrder);
-      // $("#cancelPurchase").on("click", cancelOrder);
+      $("#cancelPurchase").on("click", cancelOrder);
     });
   })();
   

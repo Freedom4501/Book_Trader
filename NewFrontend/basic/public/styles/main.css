@@ -30,6 +30,20 @@ body {
     background: #fffa;
 }
 
+#cartList{
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#orderList{
+    margin-left: auto;
+    margin-right: auto;
+}
+#bucketList{
+    margin-left: auto;
+    margin-right: auto;
+}
+
 #orderTitle {
     font-size: 2em;
     color:#800000;
