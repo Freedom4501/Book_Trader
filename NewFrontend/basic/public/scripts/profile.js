@@ -86,7 +86,6 @@
         });
     }
 
-
   $(document).ready(function () {
     let displaySection = $("#profileContainer");
     const profileName = document.createElement("h2");
@@ -106,7 +105,7 @@
     document.getElementById("inputNewEmail").value = localStorage.getItem("EmailLogin");
     $("#submitUpdateProfile").on("click", updateProfile);
     $("#submitUpdatePassword").on("click", updatePassword);
-    $("#submitDeleteProfile").on("click", deleteProfile);
+    //$("#submitDeleteProfile").on("click", deleteProfile);
     $("#logoutBtn").on("click", logout);
   });
 })();

@@ -144,13 +144,7 @@
         localStorage.setItem("price", data.price);      
     }
 
-    function getProfile(){
-        window.location="./profile.html";
-    }
 
-    function getCart(){
-        window.location="./cart.html";
-    }
 
    
     $(document).ready(function () {
