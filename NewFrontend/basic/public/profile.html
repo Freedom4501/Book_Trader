@@ -21,7 +21,10 @@
         <button id="logoutBtn" class="dropdown-item" type="button" data-toggle="modal">LOGOUT</button>
         <button id="updateProfileBtn" class="dropdown-item" type="button" data-toggle="modal" data-target="#updateProfileDialog">UPDATE PROFILE</button>
         <button id="updatePasswordBtn" class="dropdown-item" type="button" data-toggle="modal" data-target="#updatePasswordDialog">UPDATE PASSWORD</button>
-        <button id="deleteProfileBtn" class="dropdown-item" type="button" data-toggle="modal" data-target="#deleteProfileDialog">DELETE PROFILE</button>
+        <!-- <button id="deleteProfileBtn" class="dropdown-item" type="button" data-toggle="modal" data-target="#deleteProfileDialog">DELETE PROFILE</button> -->
+        <button id="searchBtn" class="dropdown-item" type="button" data-toggle="modal" data-target="#searchDialog">SEARCH BOOK</button>
+        <button id="cartBtn" class="dropdown-item" type="button" data-toggle="modal" onclick="window.location='./cart.html'">CART</button>
+        <button id="orderBtn" class="dropdown-item" type="button" data-toggle="modal" onclick="window.location='./order.html'">ORDER</button>
         <button id="addBtn" class="dropdown-item" type="button" data-toggle="modal" data-target="#addDialog">SELL A BOOK</button>
       </div>
     </div>
@@ -194,7 +197,55 @@
       </div>
     </div>
   </div>
-
+  
+  <div class="modal fade" id="searchDialog" tabindex="-1" role="dialog" aria-labelledby="search"
+    aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Search</h5>
+          </div>
+          <div class="modal-body">
+            <div class="form-group row">
+              <label for="searchISBN" class="col-sm-2 control-label">ISBN:</label>
+              <div class="col-sm-10">
+                <input type="text" id="searchISBN" class="form-control" placeholder="Book ISBN">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="searchTitle" class="col-sm-2 control-label">Title:</label>
+              <div class="col-sm-10">
+                <input type="text" id="searchTitle" class="form-control" placeholder="Book Title">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="searchAuthor" class="col-sm-2 control-label">Author:</label>
+              <div class="col-sm-10">
+                <input type="text" id="searchAuthor" class="form-control" placeholder="Book Author">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="searchPriceGreaterThan" class="col-sm-2 control-label">Price Greater Than:</label>
+              <div class="col-sm-10">
+                <input type="number" id="searchPriceGreaterThan" class="form-control" placeholder="Price greater than">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="searchPriceLessThan" class="col-sm-2 control-label">Price Less Than:</label>
+              <div class="col-sm-10">
+                <input type="number" id="searchPriceLessThan" class="form-control" placeholder="Price less tahn">
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-outline-dark" data-dismiss="modal">CANCEL</button>
+            <button type="button" id="submitSearch" class="btn btn-outline-dark" data-dismiss="modal">SEARCH</button>
+            <button type="button" id="searchAllBooks" class="btn btn-outline-dark" data-dismiss="modal">FIND ALL BOOKS</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
   <script src="//cdn.jsdelivr.net/npm/pouchdb@7.1.1/dist/pouchdb.min.js"></script>
   <script src="https://unpkg.com/neo4j-driver"></script>
   <script src="scripts/jquery.min.js"></script>

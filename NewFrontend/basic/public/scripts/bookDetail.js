@@ -5,18 +5,40 @@
     const driver = neo4j.driver('bolt://lim5.csse.rose-hulman.edu:7687', neo4j.auth.basic('neo4j', '000201'));
     const session = driver.session();
     var couchdb = new PouchDB('http://lim5:000201@137.112.104.118:5984/users');
+
     function updateBook() {
-        const title = document.getElementById("updateTitle").value;
-        const author = document.getElementById("updateAuthor").value;
-        const price = document.getElementById("updatePrice").value;
-        $.ajax ({
+        const username = localStorage.getItem("UsernameLogin");
+        if(username==null || username == ""){
+          alert("Please Login First");
+          return
+        }
+        const isbn = localStorage.getItem("isbn");
+        session.run(`MATCH (b:Book{ISBN:{isbn}})<-[r:SELL]-(u:User{username:{username}}) RETURN count(r) as num`, {isbn, username}).then((result) => {
+          if(result.records[0].get("num") == 0){
+            alert("You are not the seller of this book and you cannot update it");
+            return;
+          }else{
+            executeUpdateBook();
+          }
+        });
+        
+    }
+    function executeUpdateBook(){
+      const title = document.getElementById("updateTitle").value;
+      const author = document.getElementById("updateAuthor").value;
+      const price = document.getElementById("updatePrice").value;
+      $.ajax ({
             url: `${apiUrl}isbn/${localStorage.getItem("isbn")}/`,
             type: "PUT",
             data: {"title": title, "author": author, "isbn": localStorage.getItem("isbn"), "price": price}, 
             dataType: "JSON",
             success: (data) => {
                 console.log(data);
-                window.location = "./index.html";
+                localStorage.setItem("title", title);
+                localStorage.setItem("author", author);
+                localStorage.setItem("price", price);  
+                window.location = "./profile.html";
+                alert("Successfully Update");
             },
             error: (request, status, error) => {
                 console.log(error);
@@ -26,17 +48,35 @@
     }
 
     function deleteBook() {
-        $.ajax({
+      const username = localStorage.getItem("UsernameLogin");
+      if(username==null || username == ""){
+        alert("Please Login First");
+        return
+      }
+      const isbn = localStorage.getItem("isbn");
+      session.run(`MATCH (b:Book{ISBN:{isbn}})<-[r:SELL]-(u:User{username:{username}}) RETURN count(r) as num`, {isbn, username}).then((result) => {
+        if(result.records[0].get("num") == 0){
+          alert("You are not the seller of this book and you cannot update it");
+          return;
+        }else{
+          executeDeleteBook();
+        }
+      });
+    }
+    function executeDeleteBook(){
+      $.ajax({
             url: `${apiUrl}isbn/${localStorage.getItem("isbn")}/`,
             type: "DELETE",
             success: (data) => {
                 console.log(data);
+                const isbn = localStorage.getItem("isbn");
                 session.run(`MATCH (b:Book {ISBN:{isbn}} ) DETACH DELETE b RETURN count(b) AS num`, {isbn}).then((result) => {
                     if(result.records[0].get("num")== 0){
                       console.log("Successfully deleted book "+ isbn);
                     }
                   });
-                window.location = "./index.html";
+                window.location = "./profile.html";
+                alert("Successfully deleted book "+ isbn);
             },
             error: (request, status, error) => {
                 window.location = "./404.html";
@@ -79,6 +119,7 @@
             } else {
               alert("Can not get ISBN");
               console.log("This book does not exist");
+              return;
             }
           },  
           error: (request, status, error) => {
@@ -88,7 +129,7 @@
       });
     }
       
-      function trackUser(isbn, username){
+    function trackUser(isbn, username){
         couchdb.get(username, function(error, result) {
           if(error){
             console.log("No such user");
@@ -100,17 +141,15 @@
             console.log(isbn);
             console.log(username);
             console.log(result);
-            executeAddBook(isbn, username);
+            executeAddBookInCart(isbn, username);
           }
         });
     }
       
-      function executeAddBook(isbn, username){
+    function executeAddBookInCart(isbn, username){
         session.run(`MATCH (u:User{username:{username}}),(b:Book{ISBN:{isbn}}) CREATE (b)-[r:IN_CART]->(u) RETURN count(r) AS num`, {username, isbn}).then((result) => {
-          if(result.records[0].get("num")> 1){
-            console.log("Successfully added book "+isbn+" to "+username+"'s cart!");
-            alert("Successfully added book "+isbn+" to "+username+"'s cart!");
-          }
+          console.log("Successfully added book "+isbn+" to "+username+"'s cart!");
+          alert("Successfully added book "+isbn+" to "+username+"'s cart!");
         });
     }
     function buyBook(){
