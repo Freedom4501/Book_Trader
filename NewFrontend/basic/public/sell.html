@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="styles/bootstrap.min.css">
+  <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"> -->
+  <link rel="stylesheet" href="styles/main.css">
+  <title>Order</title>
+</head>
+
+<body>
+  <nav class="navbar fixed-top">
+    <a href="./index.html">Book Trader</a>
+    <div class="btn-group">
+      <span data-toggle="dropdown">
+        <i class="material-icons">menu</i>
+      </span>
+      <div class="dropdown-menu dropdown-menu-right">
+        <!-- <button id="" class="dropdown-item" type="button" data-toggle="modal" data-target="#cancelOrderDialog">CancelOrder</button> -->
+      </div>
+
+    </div>
+  </nav>
+  <div id="orderTitle">
+    <p>Books Sold</p>
+  </div>
+
+  <div id="list-page" class="container page-container">
+    <table id="sellList">
+      
+    </table>
+  </div>
+
+  <!-- <div class="modal fade" id="cancelOrderDialog" tabindex="-1" role="dialog" aria-labelledby="cancelOrder"
+  aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Cancel Order</h5>
+        </div>
+        <div class="modal-body">
+          <div class="form-group row">
+            <label for="inputISBN" class="col-sm-2 control-label">ISBN:</label>
+            <div class="col-sm-10">
+              <input type="text" id="cancelISBN" class="form-control" placeholder="Book Order ISBN">
+            </div>
+          </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-dark" data-dismiss="modal">CANCEL</button>
+          <button type="button" id="cancelPurchase" class="btn btn-outline-dark" data-dismiss="modal">CANCEL ORDER</button>
+        </div>
+      </div>
+    </div>
+  </div> -->
+
+    
+
+
+  <script src="https://unpkg.com/neo4j-driver"></script>
+  <script src="//cdn.jsdelivr.net/npm/pouchdb@7.1.1/dist/pouchdb.min.js"></script>
+  <script src="scripts/jquery.min.js"></script>
+  <script src="scripts/popper.min.js"></script>
+  <script src="scripts/bootstrap.min.js"></script>
+  <script src="scripts/main.js"></script>
+  <script src="scripts/sell.js"></script>
+</body>
+
+</html>
