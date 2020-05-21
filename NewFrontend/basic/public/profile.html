@@ -12,7 +12,7 @@
 
 <body>
   <nav class="navbar fixed-top">
-    <a href="./index.html">Book Trader</a>
+    <a href="./profile.html">Book Trader</a>
     <div class="btn-group">
       <span data-toggle="dropdown">
         <i class="material-icons">menu</i>
@@ -21,11 +21,11 @@
         <button id="logoutBtn" class="dropdown-item" type="button" data-toggle="modal">LOGOUT</button>
         <button id="updateProfileBtn" class="dropdown-item" type="button" data-toggle="modal" data-target="#updateProfileDialog">UPDATE PROFILE</button>
         <button id="updatePasswordBtn" class="dropdown-item" type="button" data-toggle="modal" data-target="#updatePasswordDialog">UPDATE PASSWORD</button>
-        <!-- <button id="deleteProfileBtn" class="dropdown-item" type="button" data-toggle="modal" data-target="#deleteProfileDialog">DELETE PROFILE</button> -->
         <button id="searchBtn" class="dropdown-item" type="button" data-toggle="modal" data-target="#searchDialog">SEARCH BOOK</button>
         <button id="cartBtn" class="dropdown-item" type="button" data-toggle="modal" onclick="window.location='./cart.html'">CART</button>
         <button id="orderBtn" class="dropdown-item" type="button" data-toggle="modal" onclick="window.location='./order.html'">ORDER</button>
         <button id="addBtn" class="dropdown-item" type="button" data-toggle="modal" data-target="#addDialog">SELL A BOOK</button>
+        <button id="soldBtn" class="dropdown-item" type="button" data-toggle="modal" onclick="window.location='./sell.html'">SOLD</button>
       </div>
     </div>
   </nav>
@@ -113,7 +113,7 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title">Add A Book</h5>
+          <h5 class="modal-title">Sell A Book</h5>
         </div>
         <div class="modal-body">
           <div class="form-group row">

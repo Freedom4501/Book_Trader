@@ -30,12 +30,34 @@ body {
     background: #fffa;
 }
 
+#responseTitle {
+    font-size: 2em;
+    color:#800000;
+    text-align: center;
+    margin: 50px ;
+    font-weight: 200;
+    border: 1px solid black;
+    padding: 20px;
+    background: #fffa;
+}
+
 #cartList{
     margin-left: auto;
     margin-right: auto;
 }
 
 #sellList{
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#responseList{
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#commentList{
+    margin-bottom: auto;
     margin-left: auto;
     margin-right: auto;
 }
@@ -50,6 +72,16 @@ body {
 }
 
 #orderTitle {
+    font-size: 2em;
+    color:#800000;
+    text-align: center;
+    margin: 50px ;
+    font-weight: 200;
+    border: 1px solid black;
+    padding: 20px;
+    background: #fffa;
+}
+#commentTitle {
     font-size: 2em;
     color:#800000;
     text-align: center;

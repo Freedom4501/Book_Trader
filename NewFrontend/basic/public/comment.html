@@ -5,9 +5,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="stylesheet" href="styles/bootstrap.min.css">
-  <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"> -->
   <link rel="stylesheet" href="styles/main.css">
-  <title>Order</title>
+  <title>Comment</title>
 </head>
 
 <body>
@@ -18,50 +17,60 @@
         <i class="material-icons">menu</i>
       </span>
       <div class="dropdown-menu dropdown-menu-right">
-        <button id="cancelOrderBtn" class="dropdown-item" type="button" data-toggle="modal" data-target="#cancelOrderDialog">CancelOrder</button>
+        <button id="addResponse" class="dropdown-item" type="button" data-toggle="modal" data-target="#responseDialog">Add A Response</button>
       </div>
-
     </div>
   </nav>
-  <div id="orderTitle">
-    <p>Your Orders</p>
+
+  <div id="commentTitle">
+    <p id="commentTitleContent"></p>
   </div>
 
   <div id="list-page" class="container page-container">
-    <table id="orderList">
+    <table id="commentList">
       
     </table>
   </div>
 
-  <div class="modal fade" id="cancelOrderDialog" tabindex="-1" role="dialog" aria-labelledby="cancelOrder"
-  aria-hidden="true">
+  <div id="responseTitle">
+    <p>Response From Seller</p>
+  </div>
+  <div id="list-page" class="container page-container">
+    <table id="responseList">
+      
+    </table>
+  </div>
+
+  <div class="modal fade" id="responseDialog" tabindex="-1" role="dialog" aria-labelledby="response" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title">Cancel Order</h5>
+          <h5 class="modal-title">Add Response</h5>
         </div>
         <div class="modal-body">
           <div class="form-group row">
-            <label for="inputISBN" class="col-sm-2 control-label">ISBN:</label>
+            <label for="inputResponse" class="col-sm-2 control-label">RESPONSE:</label>
             <div class="col-sm-10">
-              <input type="text" id="cancelISBN" class="form-control" placeholder="Book Order ISBN">
+              <input type="text" id="inputResponse" class="form-control" placeholder="Author's Response">
             </div>
           </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-outline-dark" data-dismiss="modal">CANCEL</button>
-          <button type="button" id="cancelPurchase" class="btn btn-outline-dark" data-dismiss="modal">CANCEL ORDER</button>
+          <button type="button" id="submitAddResponse" class="btn btn-outline-dark" data-dismiss="modal">ADD RESPONSE</button>
         </div>
       </div>
     </div>
   </div>
 
-  <script src="https://unpkg.com/neo4j-driver"></script>
+
+
   <script src="//cdn.jsdelivr.net/npm/pouchdb@7.1.1/dist/pouchdb.min.js"></script>
+  <script src="https://unpkg.com/neo4j-driver"></script>
   <script src="scripts/jquery.min.js"></script>
   <script src="scripts/popper.min.js"></script>
   <script src="scripts/bootstrap.min.js"></script>
   <script src="scripts/main.js"></script>
-  <script src="scripts/order.js"></script>
+  <script src="scripts/comment.js"></script>
 </body>
 
 </html>

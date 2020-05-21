@@ -184,7 +184,61 @@
             });
         }
       }
-    
+
+
+    function addComment(){
+      const username = localStorage.getItem("UsernameLogin");
+      const isbn = localStorage.getItem("isbn");
+      const rate = document.getElementById("inputRate").value;
+      const comment = document.getElementById("inputComment").value;
+      if(username == '' || username == null){
+        console.log("User is not logged in");
+        return;
+      } else if (isbn == '' || isbn == null){
+        console.log("ISBN is not found");
+        return;
+      } else if (rate == '' || rate == null){
+        console.log("No input of rate");
+        alert("Rate can not be empty!");
+        return;
+      } else if (comment == '' || comment == null){
+        console.log("No input of comment");
+        alert("Comment can not be empty!");
+        return;
+      } else {
+        console.log("Adding comment!");
+        session.run(`MATCH (b:Book{ISBN:{isbn}})<-[r:PURCHASE]-(u:User{username:{username}}) RETURN count(r) as num`, {isbn, username}).then((result) => {
+          if(result.records[0].get('num') == 0){
+            alert("You need to purchase before make a comment!");
+          } else {
+            checkRated(isbn, username, rate, comment, result.records[0].get('num'));
+          }
+        }).catch((err) => {
+          alert("Comment 1 failed!");
+        });
+      }
+    }
+
+    function checkRated(isbn, username, rate, comment, purchased){
+      session.run(`MATCH (b:Book{ISBN:{isbn}})<-[r:RATED]-(u:User{username:{username}}) RETURN count(r) as num`, {isbn, username}).then((result) => {
+        if(purchased<=result.records[0].get('num')){
+          alert("You reached max rate amount!");
+        } else {
+          allowRate(isbn, username, rate, comment);
+        }
+      }).catch((err) => {
+        alert("Comment failed!");
+      });
+    }
+
+    function allowRate(isbn, username, rate, comment){
+      session.run(`MATCH (b:Book{ISBN:{isbn}}),(u:User{username:{username}}) CREATE (u)-[r:RATED{rate:{rate}, comment:{comment}}]->(b)`, {isbn, username, rate, comment}).then((result) => {
+        alert("You have successfully rated this book!");
+        window.location = './comment.html';
+      }).catch((err) => {
+        alert("Comment 2 failed!");
+      });
+    }
 
     $(document).ready(function () {
         let displaySection = $("#titleContainer");
@@ -208,5 +262,6 @@
         $("#deleterBtn").on("click", deleteBook);
         $("#submitAddCartItem").on("click", addToCart);
         $("#submitBuy").on("click", buyBook);
+        $("#submitComment").on("click", addComment);
     });
 })();
