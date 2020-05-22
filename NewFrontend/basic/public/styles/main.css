@@ -15,7 +15,7 @@ body {
     border: 1px solid black;
     padding: 50px;
     background: #fffa;
-  }
+}
 #book-page {
     display: flex;
 }
@@ -41,7 +41,23 @@ body {
     background: #fffa;
 }
 
+#popularTitle{
+    font-size: 2em;
+    color:#800000;
+    text-align: center;
+    margin: 50px ;
+    font-weight: 200;
+    border: 1px solid black;
+    padding: 20px;
+    background: #fffa;
+}
+
 #cartList{
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#popularList{
     margin-left: auto;
     margin-right: auto;
 }
@@ -66,6 +82,7 @@ body {
     margin-left: auto;
     margin-right: auto;
 }
+
 #bucketList{
     margin-left: auto;
     margin-right: auto;
@@ -92,6 +109,7 @@ body {
     background: #fffa;
 }
 
+
 #profilePhoto {
     display: block;
     max-width: 150px;
@@ -99,7 +117,6 @@ body {
 }
 .btn-outline-light {
     color: #800000;
-
 }
 
 #infoContainer {
@@ -114,55 +131,3 @@ body {
     margin-top: 50px;
 }
 
-#hp1 {
-    display:inline-flex;
-    margin-top: 100px;
-    margin-right: 50px;
-    margin-left: 50px;
-
-}
-#hp2 {
-    margin-top: 100px;
-    margin-right: 50px;
-    margin-left: 50px;
-
-}
-
-#hp3 {
-    margin-top: 100px;
-    margin-right: 50px;
-    margin-left: 50px;
-
-}
-#hp4 {
-    margin-top: 100px;
-    margin-left: 50px;
-    margin-right: 50px;
-
-}
-
-#hp5 {
-    margin-top: 100px;
-    margin-left: 50px;
-    margin-right: 50px;
-
-}
-
-#hp6 {
-    margin-top: 100px;
-    margin-right: 50px;
-    margin-left: 50px;
-
-}
-#hp7 {
-    margin-top: 100px;
-    margin-left: 50px;
-    margin-right: 50px;
-
-}
-#hp8 {
-    margin-top: 100px;
-    margin-left: 50px;
-    margin-right: 50px;
-
-}

@@ -5,38 +5,40 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="stylesheet" href="styles/bootstrap.min.css">
-  <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"> -->
   <link rel="stylesheet" href="styles/main.css">
-  <title>Search Page</title>
+  <title>Popular Books</title>
 </head>
 
 <body>
   <nav class="navbar fixed-top">
     <a href="./profile.html">Book Trader</a>
     <div class="btn-group">
-      <span data-toggle="dropdown">
-        <i class="material-icons">menu</i>
-      </span>
-      <div class="dropdown-menu dropdown-menu-right">
-        <button id="sortByTitle" class="dropdown-item" type="button" data-toggle="modal" >Sort By Title</button>
-        <button id="sortByPrice" class="dropdown-item" type="button" data-toggle="modal" >Sort By Price</button>
-      </div>
     </div>
   </nav>
+
+  <div id="orderTitle">
+    <p>Most popular books (Top 3)</p>
+  </div>
+
   <div id="list-page" class="container page-container">
-    <table id="bucketList">
+    <table id="popularList">
       
     </table>
   </div>
 
 
 
+
+ 
+
+  <script src="https://unpkg.com/neo4j-driver"></script>
+  <script src="//cdn.jsdelivr.net/npm/pouchdb@7.1.1/dist/pouchdb.min.js"></script>
   <script src="scripts/jquery.min.js"></script>
   <script src="scripts/popper.min.js"></script>
   <script src="scripts/bootstrap.min.js"></script>
   <script src="scripts/main.js"></script>
-  <script src="scripts/bookDetail.js"></script>
-  <script src="scripts/SearchResult.js"></script>
+  <script src="scripts/popular.js"></script>
+
 </body>
 
 </html>
